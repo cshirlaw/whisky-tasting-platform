@@ -1,35 +1,16 @@
 {
-  "meta": {
-    "type": "lookup",
-    "entity": "bottler",
-    "version": "1.0",
-    "note": "Authoritative list of bottlers used for consistency. Extend carefully."
-  },
-  "bottlers": [
+  "version": 1,
+  "updated": "2026-01-02",
+  "items": [
+    {
+      "id": "signatory-vintage",
+      "name": "Signatory Vintage Scotch Whisky Co. Ltd.",
+      "country": "Scotland"
+    },
     {
       "id": "north-star-spirits",
       "name": "North Star Spirits",
-      "country": "Scotland",
-      "status": "operational"
-    },
-    {
-      "id": "signatory-vintage",
-      "name": "Signatory Vintage",
-      "country": "Scotland",
-      "status": "operational"
-    },
-    {
-      "id": "netherfield",
-      "name": "Netherfield",
-      "country": "Scotland",
-      "status": "operational"
-    },
-    {
-      "id": "ardnahoe",
-      "name": "Ardnahoe",
-      "country": "Scotland",
-      "status": "operational",
-      "note": "Distillery bottling its own releases."
+      "country": "Scotland"
     }
   ]
 }
