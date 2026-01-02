@@ -1,4 +1,5 @@
 import { listDavidReidTastings } from "@/lib/tastings";
+import { resolveBottlerName } from "@/lib/lookups";
 
 export default function TastingsPage() {
   const items = listDavidReidTastings();
@@ -9,18 +10,23 @@ export default function TastingsPage() {
       <p>Trial content (David Reid) used to prove structure.</p>
 
       <ul>
-        {items.map(({ slug, tasting }) => (
-          <li key={slug}>
-            <a href={`/tastings/${slug}`}>{tasting.whisky.name_display}</a>
-            <div className="text-sm text-slate-600">
-              {tasting.contributor.name}
-              {tasting.whisky.region ? ` · ${tasting.whisky.region}` : ""}
-              {tasting.whisky.age_years !== null && tasting.whisky.age_years !== undefined
-                ? ` · ${tasting.whisky.age_years}yo`
-                : ""}
-            </div>
-          </li>
-        ))}
+        {items.map(({ slug, tasting }) => {
+          const bottler = resolveBottlerName(tasting.whisky.brand_or_label);
+
+          return (
+            <li key={slug}>
+              <a href={`/tastings/${slug}`}>{tasting.whisky.name_display}</a>
+              <div className="text-sm text-slate-600">
+                {tasting.contributor.name}
+                {bottler ? ` · ${bottler}` : ""}
+                {tasting.whisky.region ? ` · ${tasting.whisky.region}` : ""}
+                {tasting.whisky.age_years !== null && tasting.whisky.age_years !== undefined
+                  ? ` · ${tasting.whisky.age_years}yo`
+                  : ""}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </main>
   );

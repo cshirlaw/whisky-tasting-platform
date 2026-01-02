@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDavidReidTasting, listDavidReidTastings } from "@/lib/tastings";
+import { resolveBottlerName } from "@/lib/lookups";
 
 export function generateStaticParams() {
   return listDavidReidTastings().map(({ slug }) => ({ slug }));
@@ -11,6 +12,7 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
   if (!result) return notFound();
 
   const { tasting, slug } = result;
+  const bottler = resolveBottlerName(tasting.whisky.brand_or_label);
 
   return (
     <main className="prose max-w-none">
@@ -24,6 +26,11 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
         <li>
           <strong>Contributor:</strong> {tasting.contributor.name} ({tasting.contributor.tier})
         </li>
+        {bottler ? (
+          <li>
+            <strong>Bottler:</strong> {bottler}
+          </li>
+        ) : null}
         {tasting.whisky.distillery ? (
           <li>
             <strong>Distillery:</strong> {tasting.whisky.distillery}
