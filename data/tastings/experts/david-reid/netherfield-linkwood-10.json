@@ -1,0 +1,69 @@
+{
+  "id": "david-reid-netherfield-linkwood-10",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "David Reid",
+    "tier": "expert",
+    "source_platform": "LinkedIn"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null,
+    "note": "Dates not captured in the screenshot. Add later if needed."
+  },
+  "whisky": {
+    "name_display": "Netherfield Speyside Single Malt Scotch Whisky (Linkwood) 10 Years Old",
+    "category": "Scotch whisky",
+    "style": "Single malt",
+    "region": "Speyside",
+    "distillery": "Linkwood",
+    "brand_or_label": "Netherfield",
+    "age_years": 10,
+    "abv_percent": null
+  },
+  "tasting": {
+    "summary": "A smoothly drinking dram with bright citrus and fruit notes.",
+    "notes": {
+      "nose": [],
+      "palate": [
+        "Lemony zest",
+        "Sour plums"
+      ],
+      "finish": [],
+      "overall": [
+        "Beautifully smooth"
+      ]
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "context": {
+    "setting": "Home",
+    "food_pairing": "Prawn curry (while cooking)",
+    "extra": "Second dram taken later."
+  },
+  "source": {
+    "platform": "LinkedIn",
+    "post_url": null,
+    "original_text": "#MyWeekendDram Through RBrand Design I met Radmila Istomina and her husband Roman, owners of Netherfield.\n\nIt is a fantastic little company based in Strathaven, South Lanarkshire. Netherfield are building their own distillery, but while they wait they slowly release small batches of exceptional whiskies that they have come across during their travels.\n\nOn Friday night I treated myself to their 10 year old Speyside Linkwood. A beautifully smooth dram, with notes of lemony zest and sour plooms. Whilst the prawn curry was cooking, I may have helped myself to another.",
+    "assets": [
+      {
+        "kind": "image",
+        "path": "sources/linkedin/david-reid/2026-01/netherfield-linkwood-10/",
+        "note": "Add the screenshots/photos for this post to the folder above."
+      }
+    ],
+    "permission": {
+      "status": "approved",
+      "note": "David Reid has approved use of his posts as trial content."
+    }
+  },
+  "tags": [
+    "entry-level-friendly",
+    "speyside",
+    "single-malt",
+    "linkwood",
+    "weekend-dram"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": "david-reid-ardnahoe-infinite-loch",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "David Reid",
+    "tier": "expert",
+    "source_platform": "LinkedIn"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null,
+    "note": "Dates not captured in the screenshot. Add later if needed."
+  },
+  "whisky": {
+    "name_display": "Ardnahoe Islay Single Malt Scotch Whisky – Infinite Loch",
+    "category": "Scotch whisky",
+    "style": "Single malt",
+    "region": "Islay",
+    "distillery": "Ardnahoe",
+    "brand_or_label": "Ardnahoe",
+    "age_years": null,
+    "abv_percent": null
+  },
+  "tasting": {
+    "summary": "Celebratory dram. Described as magnificent.",
+    "notes": {
+      "nose": [],
+      "palate": [],
+      "finish": [],
+      "overall": [
+        "Magnificent"
+      ]
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "context": {
+    "setting": "Celebration",
+    "event": "Scottish Whisky Awards (Best Product Launch category)",
+    "extra": "David notes the dram is not the winning Inaugural Release."
+  },
+  "source": {
+    "platform": "LinkedIn",
+    "post_url": null,
+    "original_text": "#MyWeekendDram It had to be something from the beautiful Ardnahoe Distillery to celebrate their victory in the Best Product Launch category at Thursday's Scottish Whisky Awards. I was delighted to work closely with Jennifer Tait on the submission and although the dram I savoured is not the winning Inaugural Release - it is nonetheless magnificent.\n\n#IslayWhisky #BestProductLaunch Andrew Laing Hunter Laing & Co Ltd. Scott Laing",
+    "assets": [
+      {
+        "kind": "image",
+        "path": "sources/linkedin/david-reid/2026-01/ardnahoe-infinite-loch/",
+        "note": "Add the screenshots/photos for this post to the folder above."
+      }
+    ],
+    "permission": {
+      "status": "approved",
+      "note": "David Reid has approved use of his posts as trial content."
+    }
+  },
+  "tags": [
+    "islay",
+    "single-malt",
+    "ardnahoe",
+    "weekend-dram",
+    "awards"
+  ]
+}
