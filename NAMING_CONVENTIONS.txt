@@ -1,0 +1,86 @@
+NAMING CONVENTIONS
+Whisky Tasting Platform
+
+
+1. General rules
+
+- Use lowercase only
+- Use hyphens only (no spaces, no underscores)
+- Avoid punctuation (no commas, apostrophes, brackets, slashes)
+- Use only factual identifiers (no opinions, no tasting words)
+- Keep names short, but unique
+
+
+2. Slugs
+
+A "slug" is the short name used in folders and filenames.
+
+Pattern:
+<producer-or-bottler>-<distillery>-<age>-<key-identifier>
+
+Examples:
+netherfield-linkwood-10yo
+ardnahoe-infinite-loch
+north-star-ardnamurchan-5yo-cask-series-016
+signatory-vintage-glenrothes-30yo-oloroso-butt
+
+
+3. Age format
+
+Always use:
+- 5yo, 10yo, 30yo
+
+Never use:
+- 5, 10, 30
+
+
+4. Source directories (original material)
+
+Pattern:
+sources/linkedin/<contributor-slug>/<yyyy-mm>/<tasting-slug>/
+
+Example:
+sources/linkedin/david-reid/2026-01/netherfield-linkwood-10yo/
+
+
+5. Source image filenames (inside the tasting source directory)
+
+Always number files so they sort in the right order.
+
+Minimum set:
+01-post-text.jpg
+02-bottle.jpg
+
+If needed:
+02-bottle-and-glass.jpg
+03-label-close-up.jpg
+04-back-label.jpg
+
+
+6. Structured tasting data files
+
+Pattern:
+data/tastings/<tier>/<contributor-slug>/<tasting-slug>.json
+
+Example:
+data/tastings/experts/david-reid/netherfield-linkwood-10yo.json
+
+
+7. When two slugs collide
+
+If two different whiskies would end up with the same slug, add one more factual identifier.
+
+Good identifiers:
+- cask-series-016
+- oloroso-butt
+- first-fill
+- inaugural-release
+- single-cask
+
+Do not add:
+- "great", "smooth", "best", "rich", or any descriptive opinion
+
+
+8. One rule above all
+
+If the name is not predictable, it is not a convention.
