@@ -1,0 +1,68 @@
+{
+  "id": "david-reid-signatory-vintage-glenrothes-30yo-oloroso-butt",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "David Reid",
+    "tier": "expert",
+    "source_platform": "LinkedIn"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null,
+    "note": "Dates not captured in the screenshots. Add later if needed."
+  },
+  "whisky": {
+    "name_display": "Signatory Vintage – Glenrothes 30 Year Old – First Fill Oloroso Sherry Butt",
+    "category": "Scotch whisky",
+    "style": "Single malt",
+    "region": "Speyside",
+    "distillery": "Glenrothes",
+    "brand_or_label": "Signatory Vintage",
+    "series": null,
+    "age_years": 30,
+    "abv_percent": null,
+    "cask_type": "First fill oloroso sherry butt",
+    "cask_number": null,
+    "bottle_count": null
+  },
+  "tasting": {
+    "summary": "Older sherried Speyside single malt. Rich profile expected from first fill oloroso cask.",
+    "notes": {
+      "nose": [],
+      "palate": [],
+      "finish": [],
+      "overall": []
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "context": {
+    "setting": "Home",
+    "extra": "Label details are important for later data capture (cask and bottling information)."
+  },
+  "source": {
+    "platform": "LinkedIn",
+    "post_url": null,
+    "original_text": null,
+    "assets": [
+      {
+        "kind": "image",
+        "path": "sources/linkedin/david-reid/2026-01/signatory-vintage-glenrothes-30yo-oloroso-butt/",
+        "note": "Add 01-post-text.jpg and 02-bottle*.jpg (including label close-up if available) to the folder above."
+      }
+    ],
+    "permission": {
+      "status": "approved",
+      "note": "David Reid has approved use of his posts as trial content."
+    }
+  },
+  "tags": [
+    "single-malt",
+    "speyside",
+    "glenrothes",
+    "signatory-vintage",
+    "sherry-cask",
+    "older-whisky"
+  ]
+}

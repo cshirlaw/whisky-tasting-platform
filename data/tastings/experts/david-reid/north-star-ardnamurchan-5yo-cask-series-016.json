@@ -1,0 +1,71 @@
+{
+  "id": "david-reid-north-star-ardnamurchan-5yo-cask-series-016",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "David Reid",
+    "tier": "expert",
+    "source_platform": "LinkedIn"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null,
+    "note": "Dates not captured in the screenshots. Add later if needed."
+  },
+  "whisky": {
+    "name_display": "North Star Spirits – Ardnamurchan 5 Year Old – Cask Series 016",
+    "category": "Scotch whisky",
+    "style": "Single malt",
+    "region": "West Highlands",
+    "distillery": "Ardnamurchan",
+    "brand_or_label": "North Star Spirits",
+    "series": "Cask Series 016",
+    "age_years": 5,
+    "abv_percent": 52.5,
+    "cask_type": null,
+    "bottling_notes_label": "Companion for a cold winter evening."
+  },
+  "tasting": {
+    "summary": "Winter evening dram. Notes include vanilla and orchard fruit.",
+    "notes": {
+      "nose": [
+        "Vanilla"
+      ],
+      "palate": [
+        "Apples",
+        "Pears"
+      ],
+      "finish": [],
+      "overall": []
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "context": {
+    "setting": "Home",
+    "extra": "David notes it pairs well with a cold winter evening."
+  },
+  "source": {
+    "platform": "LinkedIn",
+    "post_url": null,
+    "original_text": null,
+    "assets": [
+      {
+        "kind": "image",
+        "path": "sources/linkedin/david-reid/2026-01/north-star-ardnamurchan-5yo-cask-series-016/",
+        "note": "Add 01-post-text.jpg and 02-bottle*.jpg to the folder above."
+      }
+    ],
+    "permission": {
+      "status": "approved",
+      "note": "David Reid has approved use of his posts as trial content."
+    }
+  },
+  "tags": [
+    "single-malt",
+    "west-highlands",
+    "ardnamurchan",
+    "north-star-spirits",
+    "winter-dram"
+  ]
+}
