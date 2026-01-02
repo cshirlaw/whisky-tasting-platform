@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "type": "lookup",
+    "entity": "region",
+    "version": "1.0",
+    "note": "Authoritative list of Scotch whisky regions used for consistency."
+  },
+  "regions": [
+    {
+      "id": "islay",
+      "name": "Islay",
+      "country": "Scotland"
+    },
+    {
+      "id": "speyside",
+      "name": "Speyside",
+      "country": "Scotland"
+    },
+    {
+      "id": "west-highlands",
+      "name": "West Highlands",
+      "country": "Scotland"
+    },
+    {
+      "id": "highlands",
+      "name": "Highlands",
+      "country": "Scotland"
+    },
+    {
+      "id": "lowlands",
+      "name": "Lowlands",
+      "country": "Scotland"
+    },
+    {
+      "id": "campbeltown",
+      "name": "Campbeltown",
+      "country": "Scotland"
+    }
+  ]
+}
