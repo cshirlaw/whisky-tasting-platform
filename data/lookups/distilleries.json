@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "type": "lookup",
+    "entity": "distillery",
+    "version": "1.0",
+    "note": "Authoritative list of distillery names used for consistency. Extend carefully."
+  },
+  "distilleries": [
+    {
+      "id": "ardnahoe",
+      "name": "Ardnahoe",
+      "region": "Islay",
+      "country": "Scotland",
+      "status": "operational"
+    },
+    {
+      "id": "ardnamurchan",
+      "name": "Ardnamurchan",
+      "region": "West Highlands",
+      "country": "Scotland",
+      "status": "operational"
+    },
+    {
+      "id": "glenrothes",
+      "name": "Glenrothes",
+      "region": "Speyside",
+      "country": "Scotland",
+      "status": "operational"
+    },
+    {
+      "id": "linkwood",
+      "name": "Linkwood",
+      "region": "Speyside",
+      "country": "Scotland",
+      "status": "operational"
+    }
+  ]
+}
