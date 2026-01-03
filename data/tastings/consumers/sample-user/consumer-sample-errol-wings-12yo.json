@@ -1,0 +1,58 @@
+{
+  "id": "consumer-sample-errol-wings-12yo",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Sample Consumer",
+    "tier": "consumer",
+    "source_platform": "manual"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null,
+    "note": "Structure test record (replace later)."
+  },
+  "whisky": {
+    "name_display": "Errol Wings 12 Year Old",
+    "category": "Scotch whisky",
+    "style": "Blended Scotch whisky",
+    "region": null,
+    "distillery": null,
+    "brand_or_label": "Errol Wings",
+    "series": null,
+    "age_years": 12,
+    "abv_percent": null,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": "Sample consumer summary (replace later).",
+    "notes": {
+      "nose": ["Sample note."],
+      "palate": ["Sample note."],
+      "finish": ["Sample note."],
+      "overall": ["Sample note."]
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "source": {
+    "platform": "manual",
+    "post_url": null,
+    "original_text": null,
+    "assets": [
+      {
+        "kind": "image",
+        "path": "/sources/manual/sample-user/2026-01/consumer-sample-errol-wings-12yo/bottle.jpg",
+        "note": "Bottle photo (optional)"
+      }
+    ],
+    "permission": {
+      "status": "unknown",
+      "note": "Internal sample record."
+    }
+  },
+  "tags": ["sample", "consumer"]
+}
