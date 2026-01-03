@@ -3,43 +3,70 @@
   "type": "tasting",
   "version": "1.0",
   "contributor": {
-    "name": "Charles Maclean",
+    "name": "Charles MacLean",
     "tier": "expert",
     "source_platform": null
   },
   "dates": {
     "post_date": null,
-    "tasted_date": null
+    "tasted_date": "2024-07-01",
+    "note": "July 2024 (bottled product)"
   },
   "whisky": {
-    "name_display": "Errol Wings 12 Year Old",
+    "name_display": "Errol Wings 12YO Blended Scotch Whisky",
     "category": "Scotch whisky",
     "style": "Blended Scotch whisky",
-    "region": "Scotland",
+    "region": null,
+    "distillery": null,
     "brand_or_label": "Errol Wings",
+    "series": null,
     "age_years": 12,
-    "abv_percent": null
+    "abv_percent": 40,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
   },
   "tasting": {
-    "summary": "Trial expert entry used to establish multi-expert structure. Notes to be confirmed.",
+    "summary": "Pleasant and easy to drink, with good balance, body, and light spice. A rounded, approachable blended Scotch.",
     "notes": {
-      "nose": [],
-      "palate": [],
-      "finish": [],
-      "overall": []
+      "nose": [
+        "Mellow and balanced, with a gentle freshness and no aggressive prickle."
+      ],
+      "palate": [
+        "More vigorous than earlier samples, with increased body and a touch of spice. Smooth and well integrated."
+      ],
+      "finish": [
+        "Clean and lightly spicy, without harshness."
+      ],
+      "overall": [
+        "Pleasant, rounded, and easy to drink."
+      ]
     },
     "score": null,
     "comparisons": []
   },
   "source": {
-    "platform": null,
+    "platform": "private_tasting",
     "post_url": null,
-    "original_text": "Placeholder entry for structural testing. Not a published Charles Maclean note.",
-    "assets": [],
+    "original_text": null,
+    "assets": [
+      {
+        "kind": "image",
+        "path": "/sources/errol-wings/12yo/bottle-front.jpg",
+        "note": "Bottle front (photo)"
+      }
+    ],
     "permission": {
-      "status": "pending",
-      "note": "Structural placeholder only. Not for publication."
+      "status": "approved",
+      "note": "Notes supplied for use in this project."
     }
   },
-  "tags": ["trial", "expert", "structure-test"]
+  "tags": [
+    "errol-wings",
+    "12yo",
+    "blended-scotch",
+    "bottled-product",
+    "expert-tasting"
+  ]
 }
