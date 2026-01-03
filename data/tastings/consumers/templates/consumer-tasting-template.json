@@ -1,0 +1,51 @@
+{
+  "id": "consumer-template-001",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Anonymous",
+    "tier": "consumer",
+    "source_platform": null
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null
+  },
+  "whisky": {
+    "name_display": "Template Whisky Name",
+    "category": "Scotch whisky",
+    "style": "Blended Scotch whisky",
+    "region": null,
+    "distillery": null,
+    "brand_or_label": null,
+    "series": null,
+    "age_years": null,
+    "abv_percent": null,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": "Template entry for structure only. Replace with a real consumer tasting.",
+    "notes": {
+      "nose": [],
+      "palate": [],
+      "finish": [],
+      "overall": []
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "source": {
+    "platform": null,
+    "post_url": null,
+    "original_text": null,
+    "assets": [],
+    "permission": {
+      "status": "unknown",
+      "note": "Template only. Not a real consumer submission."
+    }
+  },
+  "tags": ["template", "consumer", "structure-test"]
+}
