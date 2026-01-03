@@ -70,5 +70,10 @@
     "single-malt",
     "linkwood",
     "weekend-dram"
-  ]
+  ],
+  "editorial": {
+    "status": "draft",
+    "note": null,
+    "last_reviewed": null
+  }
 }

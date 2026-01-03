@@ -380,6 +380,32 @@
           }
         }
       }
+    },
+    "editorial": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "reviewed",
+            "approved"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_reviewed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
     }
   }
 }

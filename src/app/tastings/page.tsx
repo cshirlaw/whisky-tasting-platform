@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { listAllTastings } from "../../lib/tastings";
 
-function tierLabel(tier: string, sourcePlatform?: string | null) {
-  if (tier === "expert") return sourcePlatform ? `Expert (${sourcePlatform})` : "Expert";
+function tierLabel(tier: string, platform?: string | null) {
+  if (tier === "expert") return platform ? `Expert (${platform})` : "Expert";
   if (tier === "consumer") return "Consumer";
   return "Other";
 }
@@ -13,8 +13,16 @@ function tierRank(tier: string) {
   return 2;
 }
 
-function sortItems(items: Array<{ slug: string; tasting: any; origin: string }>) {
-  return items.sort((a, b) => {
+function editorialLabel(status?: string | null) {
+  if (status === "approved") return "Approved";
+  if (status === "reviewed") return "Reviewed";
+  return "Draft";
+}
+
+export default function TastingsPage() {
+  const items = listAllTastings();
+
+  items.sort((a, b) => {
     const ta = a.tasting?.contributor?.tier || "other";
     const tb = b.tasting?.contributor?.tier || "other";
     const ra = tierRank(ta);
@@ -25,86 +33,44 @@ function sortItems(items: Array<{ slug: string; tasting: any; origin: string }>)
     const nb = (b.tasting?.whisky?.name_display || "").toLowerCase();
     return na.localeCompare(nb);
   });
-}
-
-function Section({
-  title,
-  items
-}: {
-  title: string;
-  items: Array<{ slug: string; tasting: any; origin: string }>;
-}) {
-  return (
-    <section style={{ marginTop: "1.5rem" }}>
-      <h2>{title}</h2>
-
-      {items.length === 0 ? (
-        <p>(None yet.)</p>
-      ) : (
-        <ul>
-          {items.map(({ slug, tasting }) => {
-            const name = tasting?.whisky?.name_display || "Untitled tasting";
-            const contributorName = tasting?.contributor?.name || "Unknown";
-            const tier = tasting?.contributor?.tier || "other";
-            const sourcePlatform = tasting?.contributor?.source_platform || null;
-
-            return (
-              <li key={slug} style={{ marginBottom: "0.75rem" }}>
-                <div>
-                  <Link href={`/tastings/${slug}`}>{name}</Link>
-                </div>
-
-                <div style={{ marginTop: "0.15rem" }}>
-                  {contributorName}
-                  <span
-                    style={{
-                      display: "inline-block",
-                      padding: "0.1rem 0.45rem",
-                      border: "1px solid #ccc",
-                      borderRadius: "999px",
-                      fontSize: "0.75rem",
-                      marginLeft: "0.5rem"
-                    }}
-                  >
-                    {tierLabel(tier, sourcePlatform)}
-                  </span>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </section>
-  );
-}
-
-export default function TastingsPage() {
-  const all = sortItems(listAllTastings());
-
-  const experts = all.filter((x) => (x.tasting?.contributor?.tier || "other") === "expert");
-  const consumers = all.filter((x) => (x.tasting?.contributor?.tier || "other") === "consumer");
-  const other = all.filter((x) => {
-    const t = x.tasting?.contributor?.tier || "other";
-    return t !== "expert" && t !== "consumer";
-  });
 
   return (
-    <main>
-      <h1>Whisky Tasting Platform</h1>
+    <main style={{ maxWidth: 860, margin: "2rem auto", padding: "0 1rem" }}>
+      <h1 style={{ marginBottom: "0.5rem" }}>Tastings</h1>
+      <p style={{ color: "#555", marginTop: 0 }}>
+        Trial content. Archive first, structure second, interface last.
+      </p>
 
-      <nav style={{ marginBottom: "1rem" }}>
-        <Link href="/">Home</Link>
-      </nav>
+      <ul style={{ listStyle: "none", padding: 0, marginTop: "1.25rem" }}>
+        {items.map(({ slug, tasting }) => {
+          const href = `/tastings/${encodeURIComponent(slug)}`;
+          const tier = tasting.contributor?.tier || "other";
+          const platform = tasting.contributor?.source_platform || null;
+          const status = tasting.editorial?.status || "draft";
 
-      <h1>Tastings</h1>
+          return (
+            <li key={slug} style={{ padding: "0.9rem 0", borderBottom: "1px solid #eee" }}>
+              <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", alignItems: "baseline" }}>
+                <Link href={href} style={{ fontSize: "1.05rem", textDecoration: "none" }}>
+                  {tasting.whisky?.name_display || slug}
+                </Link>
 
-      <Section title="Experts" items={experts} />
-      <Section title="Consumers" items={consumers} />
+                <span style={{ padding: "0.12rem 0.5rem", border: "1px solid #ccc", borderRadius: 999, fontSize: "0.78rem" }}>
+                  {tierLabel(tier, platform)}
+                </span>
 
-      {other.length > 0 ? <Section title="Other" items={other} /> : null}
+                <span style={{ padding: "0.12rem 0.5rem", border: "1px solid #ddd", borderRadius: 999, fontSize: "0.78rem", color: "#444" }}>
+                  {editorialLabel(status)}
+                </span>
+              </div>
 
-      <hr style={{ marginTop: "2rem" }} />
-      <p>Built for archive and comparison. Trial content only at this stage.</p>
+              <div style={{ color: "#666", fontSize: "0.92rem", marginTop: "0.35rem" }}>
+                {tasting.contributor?.name || "Unknown contributor"}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </main>
   );
 }

@@ -74,5 +74,10 @@
     "errol-wings",
     "12yo",
     "blended-scotch"
-  ]
+  ],
+  "editorial": {
+    "status": "draft",
+    "note": null,
+    "last_reviewed": null
+  }
 }
