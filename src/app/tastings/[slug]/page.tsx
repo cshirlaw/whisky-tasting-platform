@@ -1,5 +1,26 @@
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
 import { getTastingBySlug } from "../../../lib/tastings";
+
+function ocrPathForAsset(assetPath: string) {
+  // assetPath like: /sources/linkedin/.../post-text.jpg
+  // ocr file like:  /sources/linkedin/.../post-text.ocr.txt
+  if (!assetPath) return null;
+  const noExt = assetPath.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+  return noExt + ".ocr.txt";
+}
+
+function readPublicText(publicPathFromRoot: string) {
+  try {
+    const abs = path.join(process.cwd(), "public", publicPathFromRoot.replace(/^\//, ""));
+    if (!fs.existsSync(abs)) return null;
+    const raw = fs.readFileSync(abs, "utf8");
+    return raw && raw.trim() ? raw : null;
+  } catch {
+    return null;
+  }
+}
 
 function editorialLabel(status?: string | null) {
   if (status === "approved") return "Approved";
@@ -9,6 +30,13 @@ function editorialLabel(status?: string | null) {
 
 export default function TastingPage({ params }: { params: { slug: string } }) {
   const record = getTastingBySlug(params.slug);
+
+  const cleanedText = record?.tasting?.source?.original_text || null;
+  const assetsToShow = (record?.tasting?.source?.assets || []).filter((a) => {
+    // If we have cleaned text, hide the LinkedIn text screenshot(s)
+    if (cleanedText && typeof a.path === "string" && a.path.includes("post-text")) return false;
+    return true;
+  });
 
   if (!record) {
     return (
@@ -68,6 +96,22 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
       </section>
 
       <section style={{ marginBottom: "1.25rem" }}>
+
+<h2>Source text (cleaned)</h2>
+{record?.tasting?.source?.original_text ? (
+  <pre style={{
+    whiteSpace: "pre-wrap",
+    border: "1px solid #ddd",
+    padding: "0.75rem",
+    borderRadius: "6px",
+    maxWidth: "900px"
+  }}>
+    {record.tasting.source.original_text}
+  </pre>
+) : (
+  <p><em>No cleaned source text available.</em></p>
+)}
+
         <h2 style={{ marginBottom: "0.5rem" }}>Images</h2>
 
         {tasting.source?.assets && tasting.source.assets.length > 0 ? (
