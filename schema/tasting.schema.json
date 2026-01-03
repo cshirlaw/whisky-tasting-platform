@@ -4,190 +4,382 @@
   "title": "Whisky Tasting Entry",
   "type": "object",
   "additionalProperties": false,
-
-  "required": ["id", "type", "version", "contributor", "dates", "whisky", "tasting", "source"],
-
+  "required": [
+    "id",
+    "type",
+    "version",
+    "contributor",
+    "dates",
+    "whisky",
+    "tasting",
+    "source"
+  ],
   "properties": {
     "id": {
       "type": "string",
       "minLength": 3,
       "description": "Stable identifier, typically '<contributor>-<slug>'."
     },
-
     "type": {
       "type": "string",
       "const": "tasting"
     },
-
     "version": {
       "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+$",
       "description": "Schema version for the data record, e.g. '1.0'."
     },
-
     "contributor": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "tier"],
+      "required": [
+        "name",
+        "tier"
+      ],
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
         "tier": {
           "type": "string",
-          "enum": ["expert", "consumer", "other"]
+          "enum": [
+            "expert",
+            "consumer",
+            "other"
+          ]
         },
         "source_platform": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Where the original content came from, if applicable (e.g. LinkedIn)."
         }
       }
     },
-
     "dates": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["post_date", "tasted_date"],
+      "required": [
+        "post_date",
+        "tasted_date"
+      ],
       "properties": {
         "post_date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date",
           "description": "Date the original post was published (YYYY-MM-DD) if known."
         },
         "tasted_date": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date",
           "description": "Date tasted (YYYY-MM-DD) if known."
         },
-        "note": { "type": ["string", "null"] }
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
-
     "whisky": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name_display", "category", "style"],
+      "required": [
+        "name_display",
+        "category",
+        "style"
+      ],
       "properties": {
-        "name_display": { "type": "string", "minLength": 1 },
-
+        "name_display": {
+          "type": "string",
+          "minLength": 1
+        },
         "category": {
           "type": "string",
           "description": "e.g. 'Scotch whisky'."
         },
-
         "style": {
           "type": "string",
           "description": "e.g. 'Single malt', 'Blended Scotch'."
         },
-
-        "region": { "type": ["string", "null"] },
-        "distillery": { "type": ["string", "null"] },
-        "brand_or_label": { "type": ["string", "null"] },
-        "series": { "type": ["string", "null"] },
-
+        "region": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "distillery": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "brand_or_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "series": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "age_years": {
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 0
         },
-
         "abv_percent": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0,
           "maximum": 100
         },
-
-        "cask_type": { "type": ["string", "null"] },
-        "cask_number": { "type": ["string", "null"] },
-        "bottle_count": { "type": ["integer", "null"], "minimum": 0 },
-
-        "bottling_notes_label": { "type": ["string", "null"] }
+        "cask_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cask_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bottle_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bottling_notes_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
-
     "tasting": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["summary", "notes", "score", "comparisons"],
+      "required": [
+        "summary",
+        "notes",
+        "score",
+        "comparisons"
+      ],
       "properties": {
-        "summary": { "type": ["string", "null"] },
-
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "notes": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["nose", "palate", "finish", "overall"],
+          "required": [
+            "nose",
+            "palate",
+            "finish",
+            "overall"
+          ],
           "properties": {
-            "nose": { "type": "array", "items": { "type": "string" } },
-            "palate": { "type": "array", "items": { "type": "string" } },
-            "finish": { "type": "array", "items": { "type": "string" } },
-            "overall": { "type": "array", "items": { "type": "string" } }
+            "nose": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "palate": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "finish": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "overall": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         },
-
         "score": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0,
           "maximum": 100,
           "description": "Optional score; keep null if not used."
         },
-
         "comparisons": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Free-text comparisons to other whiskies."
         }
       }
     },
-
     "context": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "Optional context such as setting, food, event, etc.",
       "additionalProperties": true
     },
-
     "source": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["platform", "post_url", "original_text", "assets", "permission"],
+      "required": [
+        "platform",
+        "post_url",
+        "original_text",
+        "assets",
+        "permission"
+      ],
       "properties": {
-        "platform": { "type": ["string", "null"] },
-
+        "platform": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "post_url": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Original URL if known."
         },
-
         "original_text": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Original text from the source, kept intact."
         },
-
         "assets": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["kind", "path"],
+            "required": [
+              "kind",
+              "path"
+            ],
             "properties": {
-              "kind": { "type": "string", "enum": ["image", "video", "pdf", "other"] },
-              "path": { "type": "string", "minLength": 1 },
-              "note": { "type": ["string", "null"] }
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "image",
+                  "video",
+                  "pdf",
+                  "other"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
             }
           }
         },
-
         "permission": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["status"],
+          "required": [
+            "status"
+          ],
           "properties": {
-            "status": { "type": "string", "enum": ["approved", "pending", "unknown"] },
-            "note": { "type": ["string", "null"] }
+            "status": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "pending",
+                "unknown"
+              ]
+            },
+            "note": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           }
         }
       }
     },
-
     "tags": {
-      "type": ["array", "null"],
-      "items": { "type": "string" }
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "images": {
+      "type": "array",
+      "description": "Optional images for the tasting (served from /public).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "src"
+        ],
+        "properties": {
+          "src": {
+            "type": "string",
+            "description": "Public path, e.g. /assets/tastings/2026-01/ardnahoe-infinite-loch/bottle.jpg"
+          },
+          "alt": {
+            "type": "string",
+            "description": "Alt text for accessibility."
+          },
+          "kind": {
+            "type": "string",
+            "description": "Optional label, e.g. bottle, post-text, glass, other."
+          },
+          "credit": {
+            "type": "string",
+            "description": "Optional credit line."
+          }
+        }
+      }
     }
   }
 }

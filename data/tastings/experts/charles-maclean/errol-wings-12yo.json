@@ -1,21 +1,21 @@
 {
-  "id": "errol-wings-12yo-charles-maclean-2024-07",
+  "id": "charles-maclean:errol-wings-12yo",
   "type": "tasting",
   "version": "1.0",
   "contributor": {
     "name": "Charles MacLean",
     "tier": "expert",
-    "source_platform": "RSD internal tasting"
+    "source_platform": null
   },
   "dates": {
-    "post_date": "2024-07-01",
+    "post_date": null,
     "tasted_date": "2024-07-01",
-    "note": "Notes taken during July 2024 evaluation. Record written as one final assessment of the bottled product."
+    "note": "July 2024"
   },
   "whisky": {
-    "name_display": "Errol Wings 12 Year Old Blended Scotch whisky",
-    "category": "scotch",
-    "style": "blended",
+    "name_display": "Errol Wings 12 Year Old Blended Scotch Whisky",
+    "category": "Blended Scotch Whisky",
+    "style": "Blended Scotch Whisky",
     "region": null,
     "distillery": null,
     "brand_or_label": "Errol Wings",
@@ -28,41 +28,36 @@
     "bottling_notes_label": null
   },
   "tasting": {
-    "summary": "Pale gold. A clean, fresh nose with lemon-sherbet lift and a hint of milk chocolate. Creamy texture. Fresh, sweet start becoming very lightly acidic, then a vigorous feel with more body and a touch of spice. Pleasant and easy to drink.",
+    "summary": "Pleasant and easy to drink.",
     "notes": {
       "nose": [
-        "Pale gold",
-        "Mellow nose-feel with very light prickle",
-        "Clean, fresh aroma",
-        "Faintly spritzich, like lemon sherbet",
-        "Developing a hint of milk chocolate"
+        "Pale gold with faint green lights.",
+        "A mellow nose-feel with very light prickle.",
+        "Clean and fresh, faintly spritzich (lemon sherbet), developing a hint of milk chocolate."
       ],
       "palate": [
-        "Creamy texture",
-        "Fresh taste starting sweet, becoming very lightly acidic",
-        "Vigorous feel with more body and some spice",
-        "Pleasant and easy to drink"
+        "Creamy texture.",
+        "Fresh taste: starts sweet, becomes very lightly acidic.",
+        "More body and some spice, giving a vigorous feel."
       ],
       "finish": [
-        "Light spice",
-        "Clean, easy finish"
+        "Clean, with light spice."
       ],
       "overall": [
-        "Clean and fresh",
-        "Balanced and rounded",
-        "Easy drinking with a vigorous feel"
+        "Well balanced and rounded.",
+        "Pleasant and easy to drink."
       ]
     },
     "score": null,
     "comparisons": []
   },
   "context": {
-    "note": "Original work included several caramel trials; this record reflects the bottled product only."
+    "note": "Using the bottled product notes only (sample 4). Earlier sample comparisons removed."
   },
   "source": {
-    "platform": "RSD internal tasting",
+    "platform": "internal",
     "post_url": null,
-    "original_text": "Errol Wings 12YO @40% ABV. Clean, fresh aroma with lemon-sherbet lift and milk-chocolate hint. Creamy texture. Fresh taste, sweet then very lightly acidic. Bottled product shows a vigorous feel with more body and some spice. Pleasant and easy to drink.",
+    "original_text": null,
     "assets": [
       {
         "kind": "image",

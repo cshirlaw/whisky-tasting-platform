@@ -51,7 +51,7 @@ function Section({
             return (
               <li key={slug} style={{ marginBottom: "0.75rem" }}>
                 <div>
-                  <Link href={`/tastings/${encodeURIComponent(slug)}`}>{name}</Link>
+                  <Link href={`/tastings/${slug}`}>{name}</Link>
                 </div>
 
                 <div style={{ marginTop: "0.15rem" }}>
