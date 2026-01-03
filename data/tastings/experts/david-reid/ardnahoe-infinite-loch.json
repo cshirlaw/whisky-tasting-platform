@@ -47,8 +47,13 @@
     "assets": [
       {
         "kind": "image",
-        "path": "sources/linkedin/david-reid/2026-01/ardnahoe-infinite-loch/",
-        "note": "Add the screenshots/photos for this post to the folder above."
+        "path": "/sources/linkedin/david-reid/2026-01/ardnahoe-infinite-loch/post-text.jpg",
+        "note": "LinkedIn post text (screenshot) — LinkedIn post text (screenshot)"
+      },
+      {
+        "kind": "image",
+        "path": "/sources/linkedin/david-reid/2026-01/ardnahoe-infinite-loch/bottle.jpg",
+        "note": "Bottle photo (screenshot) — Bottle photo (screenshot)"
       }
     ],
     "permission": {
@@ -62,6 +67,5 @@
     "ardnahoe",
     "weekend-dram",
     "awards"
-  ],
-  "slug": "ardnahoe-infinite-loch"
+  ]
 }

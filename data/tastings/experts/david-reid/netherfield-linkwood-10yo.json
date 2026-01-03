@@ -50,8 +50,13 @@
     "assets": [
       {
         "kind": "image",
-        "path": "sources/linkedin/david-reid/2026-01/netherfield-linkwood-10/",
-        "note": "Add the screenshots/photos for this post to the folder above."
+        "path": "/sources/linkedin/david-reid/2026-01/netherfield-linkwood-10yo/post-text.jpg",
+        "note": "LinkedIn post text (screenshot) — LinkedIn post text (screenshot)"
+      },
+      {
+        "kind": "image",
+        "path": "/sources/linkedin/david-reid/2026-01/netherfield-linkwood-10yo/bottle.jpg",
+        "note": "Bottle photo (screenshot) — Bottle photo (screenshot)"
       }
     ],
     "permission": {
@@ -65,6 +70,5 @@
     "single-malt",
     "linkwood",
     "weekend-dram"
-  ],
-  "slug": "netherfield-linkwood-10yo"
+  ]
 }

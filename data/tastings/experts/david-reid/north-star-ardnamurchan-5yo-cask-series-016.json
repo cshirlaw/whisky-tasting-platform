@@ -52,8 +52,13 @@
     "assets": [
       {
         "kind": "image",
-        "path": "sources/linkedin/david-reid/2026-01/north-star-ardnamurchan-5yo-cask-series-016/",
-        "note": "Add 01-post-text.jpg and 02-bottle*.jpg to the folder above."
+        "path": "/sources/linkedin/david-reid/2026-01/north-star-ardnamurchan-5yo-cask-series-016/post-text.jpg",
+        "note": "LinkedIn post text (screenshot) — LinkedIn post text (screenshot)"
+      },
+      {
+        "kind": "image",
+        "path": "/sources/linkedin/david-reid/2026-01/north-star-ardnamurchan-5yo-cask-series-016/bottle.jpg",
+        "note": "Bottle photo (screenshot) — Bottle photo (screenshot)"
       }
     ],
     "permission": {
@@ -67,6 +72,5 @@
     "ardnamurchan",
     "north-star-spirits",
     "winter-dram"
-  ],
-  "slug": "north-star-ardnamurchan-5yo-cask-series-016"
+  ]
 }
