@@ -47,14 +47,14 @@
     "original_text": null,
     "assets": [
       {
-        "kind": "post_text",
+        "kind": "image",
         "path": "/sources/linkedin/david-reid/2026-01/signatory-vintage-glenrothes-30yo-oloroso-butt/post-text.jpg",
-        "note": "LinkedIn post text (screenshot)"
+        "note": "LinkedIn post text (screenshot) — LinkedIn post text (screenshot)"
       },
       {
-        "kind": "bottle",
+        "kind": "image",
         "path": "/sources/linkedin/david-reid/2026-01/signatory-vintage-glenrothes-30yo-oloroso-butt/bottle.jpg",
-        "note": "Bottle photo (screenshot)"
+        "note": "Bottle photo (screenshot) — Bottle photo (screenshot)"
       }
     ],
     "permission": {
@@ -69,6 +69,5 @@
     "signatory-vintage",
     "sherry-cask",
     "older-whisky"
-  ],
-  "slug": "signatory-vintage-glenrothes-30yo-oloroso-butt"
+  ]
 }

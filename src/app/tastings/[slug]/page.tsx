@@ -1,30 +1,30 @@
 import Link from "next/link";
-import { getDavidReidTasting, listDavidReidTastings } from "@/lib/tastings";
+import { listDavidReidTastings, getDavidReidTasting } from "../../../lib/tastings";
 
 export function generateStaticParams() {
   const all = listDavidReidTastings();
-  return all.map(({ slug }) => ({ slug }));
+  return all.map((t) => ({ slug: t.slug }));
 }
 
-export default function TastingDetailPage({ params }: { params: { slug: string } }) {
-  const found = getDavidReidTasting(params.slug);
-  if (!found) {
+export default function TastingPage({ params }: { params: { slug: string } }) {
+  const record = getDavidReidTasting(params.slug);
+
+  if (!record) {
     return (
       <main>
         <p>
-          <Link href="/tastings">Back to Tastings</Link>
+          <Link href="/tastings">Back to tastings</Link>
         </p>
         <h1>Not found</h1>
       </main>
     );
   }
 
-  const { slug, tasting } = found;
-
+  const { slug, tasting } = record;
   const assets = tasting.source?.assets ?? [];
 
   return (
-    <main>
+    <main style={{ maxWidth: "900px", padding: "1.5rem" }}>
       <header>
         <p>
           <Link href="/">Home</Link> · <Link href="/tastings">Tastings</Link>
@@ -34,58 +34,59 @@ export default function TastingDetailPage({ params }: { params: { slug: string }
 
         <ul>
           <li>
-            <strong>Contributor:</strong> {tasting.contributor.name} ({tasting.contributor.tier})
+            <strong>Contributor:</strong> {tasting.contributor.name} (
+            {tasting.contributor.tier})
           </li>
-          {tasting.whisky.brand_or_label ? (
+          {tasting.whisky.brand_or_label && (
             <li>
               <strong>Bottler:</strong> {tasting.whisky.brand_or_label}
             </li>
-          ) : null}
-          {tasting.whisky.distillery ? (
+          )}
+          {tasting.whisky.distillery && (
             <li>
               <strong>Distillery:</strong> {tasting.whisky.distillery}
             </li>
-          ) : null}
-          {tasting.whisky.region ? (
+          )}
+          {tasting.whisky.region && (
             <li>
               <strong>Region:</strong> {tasting.whisky.region}
             </li>
-          ) : null}
+          )}
         </ul>
       </header>
 
       <section>
         <h2>Summary</h2>
-        <p>{tasting.tasting.summary ?? "(No summary yet.)"}</p>
+        <p>{tasting.tasting.summary || "(No summary yet.)"}</p>
       </section>
 
       <section>
         <h2>Notes</h2>
 
         <h3>Nose</h3>
-        {tasting.tasting.notes.nose?.length ? (
-          <ul>{tasting.tasting.notes.nose.map((x, i) => <li key={i}>{x}</li>)}</ul>
+        {tasting.tasting.notes.nose.length ? (
+          <ul>{tasting.tasting.notes.nose.map((n, i) => <li key={i}>{n}</li>)}</ul>
         ) : (
           <p>—</p>
         )}
 
         <h3>Palate</h3>
-        {tasting.tasting.notes.palate?.length ? (
-          <ul>{tasting.tasting.notes.palate.map((x, i) => <li key={i}>{x}</li>)}</ul>
+        {tasting.tasting.notes.palate.length ? (
+          <ul>{tasting.tasting.notes.palate.map((n, i) => <li key={i}>{n}</li>)}</ul>
         ) : (
           <p>—</p>
         )}
 
         <h3>Finish</h3>
-        {tasting.tasting.notes.finish?.length ? (
-          <ul>{tasting.tasting.notes.finish.map((x, i) => <li key={i}>{x}</li>)}</ul>
+        {tasting.tasting.notes.finish.length ? (
+          <ul>{tasting.tasting.notes.finish.map((n, i) => <li key={i}>{n}</li>)}</ul>
         ) : (
           <p>—</p>
         )}
 
         <h3>Overall</h3>
-        {tasting.tasting.notes.overall?.length ? (
-          <ul>{tasting.tasting.notes.overall.map((x, i) => <li key={i}>{x}</li>)}</ul>
+        {tasting.tasting.notes.overall.length ? (
+          <ul>{tasting.tasting.notes.overall.map((n, i) => <li key={i}>{n}</li>)}</ul>
         ) : (
           <p>—</p>
         )}
@@ -93,28 +94,35 @@ export default function TastingDetailPage({ params }: { params: { slug: string }
 
       <section>
         <h2>Images</h2>
-        {assets.length ? (
-          <ul>
-            {assets.map((a, i) => (
-              <li key={i}>
-                <strong>{a.kind}</strong>: {a.path}
-                {a.note ? ` (${a.note})` : ""}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>(No images added yet.)</p>
-        )}
-      </section>
 
-      <section>
-        <h2>Source</h2>
-        <p>Assets folder: {tasting.source?.assets?.length ? "See Images above." : "Not yet."}</p>
+{tasting.source.assets && tasting.source.assets.length > 0 ? (
+  <div style={{ display: "grid", gap: "1rem", maxWidth: "720px" }}>
+    {tasting.source.assets.map((asset, i) => (
+      <figure key={i} style={{ margin: 0 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={asset.path}
+          alt={asset.note || asset.kind}
+          style={{ width: "100%", height: "auto", border: "1px solid #ddd" }}
+        />
+        <figcaption style={{ fontSize: "0.85rem", color: "#555", marginTop: "0.25rem" }}>
+          {(asset.note || asset.kind).toString()}
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+) : (
+  <p>(No images added yet.)</p>
+)}
+
+<h2>Source</h2>
         <p>Record slug: {slug}</p>
       </section>
 
       <hr />
-      <p>Built for archive and comparison. Trial content only at this stage.</p>
+      <p style={{ fontSize: "0.85rem", color: "#666" }}>
+        Built for archive and comparison. Trial content only at this stage.
+      </p>
     </main>
   );
 }

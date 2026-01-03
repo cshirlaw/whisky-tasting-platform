@@ -46,14 +46,14 @@
     "original_text": "#MyWeekendDram It had to be something from the beautiful Ardnahoe Distillery to celebrate their victory in the Best Product Launch category at Thursday's Scottish Whisky Awards. I was delighted to work closely with Jennifer Tait on the submission and although the dram I savoured is not the winning Inaugural Release - it is nonetheless magnificent.\n\n#IslayWhisky #BestProductLaunch Andrew Laing Hunter Laing & Co Ltd. Scott Laing",
     "assets": [
       {
-        "kind": "post_text",
+        "kind": "image",
         "path": "/sources/linkedin/david-reid/2026-01/ardnahoe-infinite-loch/post-text.jpg",
-        "note": "LinkedIn post text (screenshot)"
+        "note": "LinkedIn post text (screenshot) — LinkedIn post text (screenshot)"
       },
       {
-        "kind": "bottle",
+        "kind": "image",
         "path": "/sources/linkedin/david-reid/2026-01/ardnahoe-infinite-loch/bottle.jpg",
-        "note": "Bottle photo (screenshot)"
+        "note": "Bottle photo (screenshot) — Bottle photo (screenshot)"
       }
     ],
     "permission": {
@@ -67,6 +67,5 @@
     "ardnahoe",
     "weekend-dram",
     "awards"
-  ],
-  "slug": "ardnahoe-infinite-loch"
+  ]
 }
