@@ -1,0 +1,45 @@
+{
+  "id": "charles-maclean-errol-wings-12yo",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Charles Maclean",
+    "tier": "expert",
+    "source_platform": null
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null
+  },
+  "whisky": {
+    "name_display": "Errol Wings 12 Year Old",
+    "category": "Scotch whisky",
+    "style": "Blended Scotch whisky",
+    "region": "Scotland",
+    "brand_or_label": "Errol Wings",
+    "age_years": 12,
+    "abv_percent": null
+  },
+  "tasting": {
+    "summary": "Trial expert entry used to establish multi-expert structure. Notes to be confirmed.",
+    "notes": {
+      "nose": [],
+      "palate": [],
+      "finish": [],
+      "overall": []
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "source": {
+    "platform": null,
+    "post_url": null,
+    "original_text": "Placeholder entry for structural testing. Not a published Charles Maclean note.",
+    "assets": [],
+    "permission": {
+      "status": "pending",
+      "note": "Structural placeholder only. Not for publication."
+    }
+  },
+  "tags": ["trial", "expert", "structure-test"]
+}
