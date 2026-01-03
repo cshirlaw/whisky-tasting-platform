@@ -47,9 +47,14 @@
     "original_text": null,
     "assets": [
       {
-        "kind": "image",
-        "path": "sources/linkedin/david-reid/2026-01/signatory-vintage-glenrothes-30yo-oloroso-butt/",
-        "note": "Add 01-post-text.jpg and 02-bottle*.jpg (including label close-up if available) to the folder above."
+        "kind": "post_text",
+        "path": "/sources/linkedin/david-reid/2026-01/signatory-vintage-glenrothes-30yo-oloroso-butt/post-text.jpg",
+        "note": "LinkedIn post text (screenshot)"
+      },
+      {
+        "kind": "bottle",
+        "path": "/sources/linkedin/david-reid/2026-01/signatory-vintage-glenrothes-30yo-oloroso-butt/bottle.jpg",
+        "note": "Bottle photo (screenshot)"
       }
     ],
     "permission": {
