@@ -1,26 +1,26 @@
 {
-  "id": "consumer-sample-errol-wings-12yo",
+  "id": "consumer-trial-sample-001",
   "type": "tasting",
   "version": "1.0",
   "contributor": {
-    "name": "Sample Consumer",
+    "name": "Trial Consumer",
     "tier": "consumer",
-    "source_platform": "manual"
+    "source_platform": null
   },
   "dates": {
     "post_date": null,
     "tasted_date": null,
-    "note": "Structure test record (replace later)."
+    "note": "Trial placeholder record to prove the consumer pipeline. Replace with real consumer submissions later."
   },
   "whisky": {
-    "name_display": "Errol Wings 12 Year Old",
+    "name_display": "Example Scotch (Trial)",
     "category": "Scotch whisky",
     "style": "Blended Scotch whisky",
     "region": null,
     "distillery": null,
-    "brand_or_label": "Errol Wings",
+    "brand_or_label": null,
     "series": null,
-    "age_years": 12,
+    "age_years": null,
     "abv_percent": null,
     "cask_type": null,
     "cask_number": null,
@@ -28,42 +28,39 @@
     "bottling_notes_label": null
   },
   "tasting": {
-    "summary": "Sample consumer summary (replace later).",
+    "summary": "A simple trial record to test the consumers list and detail pages.",
     "notes": {
       "nose": [
-        "Sample note."
+        "(Add later)"
       ],
       "palate": [
-        "Sample note."
+        "(Add later)"
       ],
       "finish": [
-        "Sample note."
+        "(Add later)"
       ],
       "overall": [
-        "Sample note."
+        "(Add later)"
       ]
     },
     "score": null,
     "comparisons": []
   },
+  "context": {
+    "note": "Do not treat this as a real review. It exists only to confirm structure, routes, and validation."
+  },
   "source": {
-    "platform": "manual",
+    "platform": null,
     "post_url": null,
     "original_text": null,
-    "assets": [
-      {
-        "kind": "image",
-        "path": "/sources/manual/sample-user/2026-01/consumer-sample-errol-wings-12yo/bottle.jpg",
-        "note": "Bottle photo (optional)"
-      }
-    ],
+    "assets": [],
     "permission": {
       "status": "unknown",
-      "note": "Internal sample record."
+      "note": "Trial content."
     }
   },
   "tags": [
-    "sample",
+    "trial",
     "consumer"
   ],
   "editorial": {

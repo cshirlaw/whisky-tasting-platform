@@ -67,5 +67,10 @@
     "ardnahoe",
     "weekend-dram",
     "awards"
-  ]
+  ],
+  "editorial": {
+    "status": "draft",
+    "note": null,
+    "last_reviewed": null
+  }
 }

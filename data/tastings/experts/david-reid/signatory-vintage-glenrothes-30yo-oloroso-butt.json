@@ -69,5 +69,10 @@
     "signatory-vintage",
     "sherry-cask",
     "older-whisky"
-  ]
+  ],
+  "editorial": {
+    "status": "draft",
+    "note": null,
+    "last_reviewed": null
+  }
 }
