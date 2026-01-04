@@ -1,6 +1,7 @@
+*.bak
+*.bak.*
 .DS_Store
-node_modules
-.next
-dist
-.env
-.env.local
+.next/
+node_modules/
+public/sources/**/post-text.ocr.txt
+public/sources/**/post-text.corrected.txt
