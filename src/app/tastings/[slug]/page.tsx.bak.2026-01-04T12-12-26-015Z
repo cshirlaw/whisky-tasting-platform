@@ -1,0 +1,140 @@
+import fs from "fs";
+import path from "path";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { listAllTastings, getTastingBySlug } from "../../../lib/tastings";
+
+export function generateStaticParams() {
+  const all = listAllTastings();
+  return all.map((t) => ({ slug: t.slug }));
+}
+
+function readTextFromAssets(assets: Array<{ path: string }>): { text: string | null; hasText: boolean } {
+  const post = assets.find((a) => typeof a.path === "string" && a.path.includes("post-text"));
+  if (!post) return { text: null, hasText: false };
+
+  const correctedWebPath = post.path.replace(/\.jpe?g$/i, ".corrected.txt");
+  const ocrWebPath = post.path.replace(/\.jpe?g$/i, ".ocr.txt");
+
+  const correctedDiskPath = path.join(process.cwd(), "public", correctedWebPath.replace(/^\//, ""));
+  if (fs.existsSync(correctedDiskPath)) {
+    const txt = fs.readFileSync(correctedDiskPath, "utf8").trim();
+    return { text: txt.length ? txt : null, hasText: true };
+  }
+
+  const ocrDiskPath = path.join(process.cwd(), "public", ocrWebPath.replace(/^\//, ""));
+  if (fs.existsSync(ocrDiskPath)) {
+    const txt = fs.readFileSync(ocrDiskPath, "utf8").trim();
+    return { text: txt.length ? txt : null, hasText: true };
+  }
+
+  return { text: null, hasText: false };
+}
+
+function Lines({ title, items }: { title: string; items: string[] }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div style={{ marginBottom: "0.75rem" }}>
+      <strong>{title}:</strong>
+      <ul style={{ margin: "0.35rem 0 0 1.2rem" }}>
+        {items.map((s, i) => (
+          <li key={i}>{s}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default function TastingPage({ params }: { params: { slug: string } }) {
+  const record = getTastingBySlug(params.slug);
+
+const HIDE_LINKEDIN = false;
+  if (!record) return notFound();
+
+  const tasting = record.tasting;
+  const assets = tasting?.source?.assets || [];
+
+  const { text: cleanedText, hasText } = readTextFromAssets(assets);
+
+  const assetsToShow = (hasText
+    ? assets.filter((a) => !(typeof a.path === "string" && a.path.includes("post-text")))
+    : assets).filter((a: any) => {
+  if (!a || typeof a.path !== "string") return true;
+  if (HIDE_LINKEDIN && a.path.includes("/sources/linkedin/")) return false;
+  return true;
+});
+
+  const notes = tasting?.tasting?.notes || { nose: [], palate: [], finish: [], overall: [] };
+
+  return (
+    <main style={{ maxWidth: 900, margin: "2rem auto", padding: "0 1rem" }}>
+      <p style={{ marginBottom: "1rem" }}>
+        <Link href="/tastings">← Back to tastings</Link>
+      </p>
+
+      <header style={{ marginBottom: "1rem" }}>
+        <h1 style={{ fontSize: "1.8rem", margin: 0 }}>{tasting.whisky.name_display}</h1>
+        <p style={{ margin: "0.25rem 0 0 0", color: "#555" }}>
+          {tasting.contributor.name} · {tasting.contributor.tier}
+        </p>
+        {tasting.tasting?.score !== null && tasting.tasting?.score !== undefined ? (
+          <p style={{ margin: "0.25rem 0 0 0", color: "#555" }}>Score: {tasting.tasting.score}</p>
+        ) : null}
+      </header>
+
+      <section style={{ margin: "1.25rem 0" }}>
+        <h2 style={{ marginBottom: "0.5rem" }}>Notes</h2>
+        {tasting.tasting?.summary ? <p>{tasting.tasting.summary}</p> : <p>(No summary yet.)</p>}
+        <Lines title="Nose" items={notes.nose || []} />
+        <Lines title="Palate" items={notes.palate || []} />
+        <Lines title="Finish" items={notes.finish || []} />
+        <Lines title="Overall" items={notes.overall || []} />
+      </section>
+
+      <section style={{ margin: "1.25rem 0" }}>
+        <h2 style={{ marginBottom: "0.5rem" }}>Source text</h2>
+        {cleanedText ? (
+          <div style={{ border: "1px solid #ddd", padding: "0.75rem", borderRadius: 8, background: "#fafafa" }}>
+            <p style={{ whiteSpace: "pre-wrap", margin: 0, lineHeight: 1.45 }}>{cleanedText}</p>
+          </div>
+        ) : (
+          <p>(No source text yet.)</p>
+        )}
+      </section>
+
+      <section style={{ margin: "1.25rem 0" }}>
+        <h2 style={{ marginBottom: "0.5rem" }}>Images</h2>
+        {assetsToShow && assetsToShow.length > 0 ? (
+          <div style={{ display: "grid", gap: "1rem", maxWidth: 640 }}>
+            {assetsToShow.map((asset, i) => (
+              <figure key={i} style={{ margin: 0 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={asset.path}
+                  alt={asset.note || asset.kind}
+                  style={{
+    width: "100%",
+    maxWidth: 480,
+    height: "auto",
+    display: "block",
+    margin: "0 auto",
+    border: "1px solid #ddd",
+    borderRadius: 8
+  }}
+                />
+                <figcaption style={{ fontSize: "0.85rem", color: "#555", marginTop: "0.35rem" }}>
+                  {String(asset.kind || "image").replace(/_/g, " ")}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <p>(No images added yet.)</p>
+        )}
+      </section>
+
+      <hr />
+      <p>Built for archive and comparison. Trial content only at this stage.</p>
+    </main>
+  );
+}
