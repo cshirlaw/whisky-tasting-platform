@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import { getTastingBySlug } from "../../../lib/tastings";
 
+const HIDE_LINKEDIN = true;
+
 function ocrPathForAsset(assetPath: string) {
   // assetPath like: /sources/linkedin/.../post-text.jpg
   // ocr file like:  /sources/linkedin/.../post-text.ocr.txt
