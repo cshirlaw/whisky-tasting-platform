@@ -244,6 +244,82 @@
             "type": "string"
           },
           "description": "Free-text comparisons to other whiskies."
+        },
+        "consumer_scoring": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "overall_1_10": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "value_1_10": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 10
+            },
+            "would_buy_again": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "yes",
+                "no",
+                "maybe",
+                null
+              ]
+            },
+            "price_paid_gbp": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "served": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "neat",
+                "water",
+                "ice",
+                "mixer",
+                "cocktail",
+                null
+              ]
+            },
+            "water_added": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "tags": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "free_text": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "overall_1_10"
+          ]
         }
       }
     },

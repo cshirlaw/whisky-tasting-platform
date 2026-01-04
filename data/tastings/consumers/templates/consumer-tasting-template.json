@@ -1,18 +1,19 @@
 {
-  "id": "consumer-template-001",
+  "id": "consumer-template",
   "type": "tasting",
   "version": "1.0",
   "contributor": {
-    "name": "Anonymous",
+    "name": "Your Name",
     "tier": "consumer",
-    "source_platform": null
+    "source_platform": "internal"
   },
   "dates": {
     "post_date": null,
-    "tasted_date": null
+    "tasted_date": null,
+    "note": null
   },
   "whisky": {
-    "name_display": "Template Whisky Name",
+    "name_display": "Whisky Name",
     "category": "Scotch whisky",
     "style": "Blended Scotch whisky",
     "region": null,
@@ -27,7 +28,7 @@
     "bottling_notes_label": null
   },
   "tasting": {
-    "summary": "Template entry for structure only. Replace with a real consumer tasting.",
+    "summary": null,
     "notes": {
       "nose": [],
       "palate": [],
@@ -35,17 +36,28 @@
       "overall": []
     },
     "score": null,
-    "comparisons": []
+    "comparisons": [],
+    "consumer_scoring": {
+      "overall_1_10": 7,
+      "value_1_10": null,
+      "would_buy_again": "maybe",
+      "price_paid_gbp": null,
+      "served": null,
+      "water_added": null,
+      "tags": null,
+      "free_text": null
+    }
   },
+  "context": {},
   "source": {
-    "platform": null,
+    "platform": "internal",
     "post_url": null,
     "original_text": null,
     "assets": [],
     "permission": {
-      "status": "unknown",
-      "note": "Template only. Not a real consumer submission."
+      "status": "approved",
+      "note": null
     }
   },
-  "tags": ["template", "consumer", "structure-test"]
+  "tags": []
 }

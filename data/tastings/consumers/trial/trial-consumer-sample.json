@@ -44,7 +44,17 @@
       ]
     },
     "score": null,
-    "comparisons": []
+    "comparisons": [],
+    "consumer_scoring": {
+      "overall_1_10": 7,
+      "value_1_10": null,
+      "would_buy_again": "maybe",
+      "price_paid_gbp": null,
+      "served": null,
+      "water_added": null,
+      "tags": null,
+      "free_text": null
+    }
   },
   "context": {
     "note": "Do not treat this as a real review. It exists only to confirm structure, routes, and validation."
