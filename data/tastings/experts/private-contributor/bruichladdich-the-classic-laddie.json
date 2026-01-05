@@ -1,5 +1,5 @@
 {
-  "id": "expert-private-contributor-monkey-shoulder-the-original",
+  "id": "private-contributor-bruichladdich-the-classic-laddie",
   "type": "tasting",
   "version": "1.0",
   "contributor": {
@@ -13,8 +13,8 @@
     "note": "Private tasting"
   },
   "whisky": {
-    "name_display": "Monkey Shoulder – The Original",
-    "category": "blended-malt-scotch",
+    "name_display": "Bruichladdich The Classic Laddie (Scottish Barley)",
+    "category": "Single Malt Scotch Whisky",
     "style": "neat",
     "region": "Scotland",
     "distillery": null,
@@ -28,26 +28,25 @@
     "bottling_notes_label": null
   },
   "tasting": {
-    "summary": "A straightforward and honest blended malt. No pretensions, but well put together.",
+    "summary": "Clean, modern and approachable Islay single malt. Unpeated, fresh and well balanced.",
     "notes": {
       "nose": [
-        "Clean and calm.",
-        "Vanilla, malt, a touch of honey.",
-        "Apple and pear in the background, no sharp edges."
+        "Fresh barley and green apple.",
+        "Lemon peel, soft vanilla and light floral notes.",
+        "Clean spirit-forward aroma with no smoke."
       ],
       "palate": [
-        "Soft and rounded.",
-        "Malt sweetness, vanilla, light caramel.",
-        "Easy to drink, smooth, without tension."
+        "Soft and mouth-coating.",
+        "Sweet malt, orchard fruit and gentle citrus.",
+        "Balanced and easy drinking with good clarity."
       ],
       "finish": [
-        "Short and warm.",
-        "Malt and vanilla fade quietly."
+        "Medium length.",
+        "Clean malt and light sweetness fading gently."
       ],
       "overall": [
-        "A straightforward and honest blended malt.",
-        "No pretensions, but well put together.",
-        "Would buy again: Yes."
+        "An accessible and well-made Islay malt.",
+        "Modern in style, honest and well judged."
       ]
     },
     "score": null,
@@ -57,11 +56,11 @@
   "source": {
     "platform": "manual",
     "post_url": null,
-    "original_text": "public/sources/manual/private-contributor/monkey-shoulder-the-original/notes.txt",
+    "original_text": "public/sources/manual/private-contributor/bruichladdich-the-classic-laddie/notes.txt",
     "assets": [
       {
         "kind": "image",
-        "path": "/sources/manual/private-contributor/monkey-shoulder-the-original/image.jpg",
+        "path": "/sources/manual/private-contributor/bruichladdich-the-classic-laddie/image.jpg",
         "note": "Bottle photograph"
       }
     ],

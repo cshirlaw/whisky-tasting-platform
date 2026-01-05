@@ -1,5 +1,5 @@
 {
-  "id": "expert-private-contributor-monkey-shoulder-the-original",
+  "id": "private-contributor-grants-triple-wood-smoky",
   "type": "tasting",
   "version": "1.0",
   "contributor": {
@@ -13,8 +13,8 @@
     "note": "Private tasting"
   },
   "whisky": {
-    "name_display": "Monkey Shoulder – The Original",
-    "category": "blended-malt-scotch",
+    "name_display": "Grant’s Triple Wood Smoky",
+    "category": "Blended Scotch Whisky",
     "style": "neat",
     "region": "Scotland",
     "distillery": null,
@@ -28,26 +28,23 @@
     "bottling_notes_label": null
   },
   "tasting": {
-    "summary": "A straightforward and honest blended malt. No pretensions, but well put together.",
+    "summary": "Private tasting note.",
     "notes": {
       "nose": [
-        "Clean and calm.",
-        "Vanilla, malt, a touch of honey.",
-        "Apple and pear in the background, no sharp edges."
+        "Light smoke on entry, quickly giving way to muted malt and a slightly flat sweetness.",
+        "Aromas feel simple and somewhat disjointed."
       ],
       "palate": [
-        "Soft and rounded.",
-        "Malt sweetness, vanilla, light caramel.",
-        "Easy to drink, smooth, without tension."
+        "Thin and straightforward.",
+        "Mild smoke and a touch of caramel, but little depth or development."
       ],
       "finish": [
-        "Short and warm.",
-        "Malt and vanilla fade quietly."
+        "Short and dry.",
+        "Smoke lingers briefly, then fades without character."
       ],
       "overall": [
-        "A straightforward and honest blended malt.",
-        "No pretensions, but well put together.",
-        "Would buy again: Yes."
+        "Unremarkable and forgettable.",
+        "Nothing overtly wrong, but nothing that invites a second look."
       ]
     },
     "score": null,
@@ -57,11 +54,11 @@
   "source": {
     "platform": "manual",
     "post_url": null,
-    "original_text": "public/sources/manual/private-contributor/monkey-shoulder-the-original/notes.txt",
+    "original_text": "public/sources/manual/private-contributor/grants-triple-wood-smoky/notes.txt",
     "assets": [
       {
         "kind": "image",
-        "path": "/sources/manual/private-contributor/monkey-shoulder-the-original/image.jpg",
+        "path": "/sources/manual/private-contributor/grants-triple-wood-smoky/image.jpg",
         "note": "Bottle photograph"
       }
     ],
