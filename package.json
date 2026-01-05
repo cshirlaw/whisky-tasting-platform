@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/cshirlaw/whisky-tasting-platform#readme",
   "dependencies": {
-    "next": "^14.2.5",
+    "next": "14.2.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
