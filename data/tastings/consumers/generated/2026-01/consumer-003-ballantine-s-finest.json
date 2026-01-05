@@ -1,0 +1,76 @@
+{
+  "id": "consumer-003-ballantine-s-finest",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Consumer C",
+    "tier": "consumer",
+    "source_platform": "manual"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": "2026-01-04",
+    "note": null
+  },
+  "whisky": {
+    "name_display": "Ballantine’s Finest",
+    "category": "blended-scotch",
+    "style": "standard-mixer",
+    "region": "Scotland",
+    "distillery": null,
+    "brand_or_label": "Ballantine’s",
+    "series": null,
+    "age_years": null,
+    "abv_percent": 40,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": null,
+    "notes": {
+      "nose": [
+        "A bit sharp when neat."
+      ],
+      "palate": [
+        "Thin and slightly rough without a mixer."
+      ],
+      "finish": [
+        "Short, with a dry edge."
+      ],
+      "overall": [
+        "Familiar style (Ballantine’s); as expected.",
+        "Not fully sure today; score could move a point either way.",
+        "All right, but mainly for mixing."
+      ]
+    },
+    "score": null,
+    "comparisons": [],
+    "consumer_scoring": {
+      "version": "v1",
+      "overall_1_10": 5,
+      "confidence": "low",
+      "blind": false,
+      "served": "neat",
+      "notes_free_text": "Sharp and thin neat. Better with cola."
+    }
+  },
+  "context": null,
+  "source": {
+    "platform": "internal",
+    "post_url": null,
+    "original_text": null,
+    "assets": [],
+    "permission": {
+      "status": "approved",
+      "note": null
+    }
+  },
+  "tags": [
+    "consumer",
+    "blended-scotch",
+    "standard-mixer",
+    "ballantine-s-finest"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "consumer-007-grant-s",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Consumer G",
+    "tier": "consumer",
+    "source_platform": "manual"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": "2026-01-04",
+    "note": null
+  },
+  "whisky": {
+    "name_display": "Grant’s",
+    "category": "blended-scotch",
+    "style": "standard-mixer",
+    "region": "Scotland",
+    "distillery": null,
+    "brand_or_label": "Grant’s",
+    "series": null,
+    "age_years": null,
+    "abv_percent": 40,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": null,
+    "notes": {
+      "nose": [
+        "Light and simple on the nose."
+      ],
+      "palate": [
+        "Works with cola; nothing complicated."
+      ],
+      "finish": [
+        "Short finish, but fine as a mixer."
+      ],
+      "overall": [
+        "Blind: judged it on the glass, not the label.",
+        "Pleasant and easy to drink."
+      ]
+    },
+    "score": null,
+    "comparisons": [],
+    "consumer_scoring": {
+      "version": "v1",
+      "overall_1_10": 6,
+      "confidence": "medium",
+      "blind": true,
+      "served": "highball",
+      "notes_free_text": "Does the job as a mixer. Nothing special."
+    }
+  },
+  "context": null,
+  "source": {
+    "platform": "internal",
+    "post_url": null,
+    "original_text": null,
+    "assets": [],
+    "permission": {
+      "status": "approved",
+      "note": null
+    }
+  },
+  "tags": [
+    "consumer",
+    "blended-scotch",
+    "standard-mixer",
+    "grant-s"
+  ]
+}

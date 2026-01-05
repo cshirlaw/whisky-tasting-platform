@@ -1,0 +1,76 @@
+{
+  "id": "consumer-012-johnnie-walker-black-label-12",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Consumer B",
+    "tier": "consumer",
+    "source_platform": "manual"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": "2026-01-04",
+    "note": null
+  },
+  "whisky": {
+    "name_display": "Johnnie Walker Black Label 12",
+    "category": "blended-scotch",
+    "style": "entry-neat",
+    "region": "Scotland",
+    "distillery": null,
+    "brand_or_label": "Johnnie Walker",
+    "series": "Black Label",
+    "age_years": 12,
+    "abv_percent": 40,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": null,
+    "notes": {
+      "nose": [
+        "More depth than the basic blends."
+      ],
+      "palate": [
+        "Smoother and better balanced."
+      ],
+      "finish": [
+        "Medium finish with a bit of smoke and spice."
+      ],
+      "overall": [
+        "Blind: judged it on the glass, not the label.",
+        "Very confident on this one.",
+        "Pleasant and easy to drink."
+      ]
+    },
+    "score": null,
+    "comparisons": [],
+    "consumer_scoring": {
+      "version": "v1",
+      "overall_1_10": 7,
+      "confidence": "high",
+      "blind": true,
+      "served": "neat",
+      "notes_free_text": "Solid neat whisky. A touch of smoke and spice."
+    }
+  },
+  "context": null,
+  "source": {
+    "platform": "internal",
+    "post_url": null,
+    "original_text": null,
+    "assets": [],
+    "permission": {
+      "status": "approved",
+      "note": null
+    }
+  },
+  "tags": [
+    "consumer",
+    "blended-scotch",
+    "entry-neat",
+    "johnnie-walker-black-label-12"
+  ]
+}
