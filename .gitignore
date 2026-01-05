@@ -5,3 +5,5 @@
 node_modules/
 public/sources/**/post-text.ocr.txt
 public/sources/**/post-text.corrected.txt
+
+_trash/

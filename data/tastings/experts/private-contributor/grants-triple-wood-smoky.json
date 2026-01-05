@@ -1,0 +1,75 @@
+{
+  "id": "private-contributor-grants-triple-wood-smoky",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Private Contributor",
+    "tier": "expert",
+    "source_platform": "manual"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null,
+    "note": "Private tasting"
+  },
+  "whisky": {
+    "name_display": "Grant’s Triple Wood Smoky",
+    "category": "Blended Scotch Whisky",
+    "style": "neat",
+    "region": "Scotland",
+    "distillery": null,
+    "brand_or_label": "Monkey Shoulder",
+    "series": null,
+    "age_years": null,
+    "abv_percent": 40,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": "Private tasting note.",
+    "notes": {
+      "nose": [
+        "Light smoke on entry, quickly giving way to muted malt and a slightly flat sweetness.",
+        "Aromas feel simple and somewhat disjointed."
+      ],
+      "palate": [
+        "Thin and straightforward.",
+        "Mild smoke and a touch of caramel, but little depth or development."
+      ],
+      "finish": [
+        "Short and dry.",
+        "Smoke lingers briefly, then fades without character."
+      ],
+      "overall": [
+        "Unremarkable and forgettable.",
+        "Nothing overtly wrong, but nothing that invites a second look."
+      ]
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "context": null,
+  "source": {
+    "platform": "manual",
+    "post_url": null,
+    "original_text": "public/sources/manual/private-contributor/grants-triple-wood-smoky/notes.txt",
+    "assets": [
+      {
+        "kind": "image",
+        "path": "/sources/manual/private-contributor/grants-triple-wood-smoky/image.jpg",
+        "note": "Bottle photograph"
+      }
+    ],
+    "permission": {
+      "status": "approved",
+      "note": "Supplied directly by contributor (private tasting)"
+    }
+  },
+  "tags": [
+    "expert",
+    "manual",
+    "private-tasting"
+  ]
+}

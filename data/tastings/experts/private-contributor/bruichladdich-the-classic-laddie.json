@@ -1,0 +1,77 @@
+{
+  "id": "private-contributor-bruichladdich-the-classic-laddie",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "name": "Private Contributor",
+    "tier": "expert",
+    "source_platform": "manual"
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": null,
+    "note": "Private tasting"
+  },
+  "whisky": {
+    "name_display": "Bruichladdich The Classic Laddie (Scottish Barley)",
+    "category": "Single Malt Scotch Whisky",
+    "style": "neat",
+    "region": "Scotland",
+    "distillery": null,
+    "brand_or_label": "Monkey Shoulder",
+    "series": null,
+    "age_years": null,
+    "abv_percent": 40,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": "Clean, modern and approachable Islay single malt. Unpeated, fresh and well balanced.",
+    "notes": {
+      "nose": [
+        "Fresh barley and green apple.",
+        "Lemon peel, soft vanilla and light floral notes.",
+        "Clean spirit-forward aroma with no smoke."
+      ],
+      "palate": [
+        "Soft and mouth-coating.",
+        "Sweet malt, orchard fruit and gentle citrus.",
+        "Balanced and easy drinking with good clarity."
+      ],
+      "finish": [
+        "Medium length.",
+        "Clean malt and light sweetness fading gently."
+      ],
+      "overall": [
+        "An accessible and well-made Islay malt.",
+        "Modern in style, honest and well judged."
+      ]
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "context": null,
+  "source": {
+    "platform": "manual",
+    "post_url": null,
+    "original_text": "public/sources/manual/private-contributor/bruichladdich-the-classic-laddie/notes.txt",
+    "assets": [
+      {
+        "kind": "image",
+        "path": "/sources/manual/private-contributor/bruichladdich-the-classic-laddie/image.jpg",
+        "note": "Bottle photograph"
+      }
+    ],
+    "permission": {
+      "status": "approved",
+      "note": "Supplied directly by contributor (private tasting)"
+    }
+  },
+  "tags": [
+    "expert",
+    "manual",
+    "private-tasting"
+  ]
+}
