@@ -66,8 +66,13 @@ function hasConsumerScoring(tastingObj: any) {
   return isObject(tastingObj) && isObject((tastingObj as any).consumer_scoring);
 }
 
+function safeDecodeSlug(v: string) {
+  try { return decodeURIComponent(v); } catch { return v; }
+}
+
 export default async function TastingPage({ params }: { params: { slug: string } }) {
-  const file = findTastingFile(safeDecodeSlug(params.slug));
+  const decodedSlug = safeDecodeSlug(params.slug);
+  const file = findTastingFile(decodedSlug) || findTastingFile(params.slug);
   if (!file) notFound();
 
   const record = readJson(file);
