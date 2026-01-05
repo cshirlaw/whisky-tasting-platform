@@ -67,7 +67,7 @@ function hasConsumerScoring(tastingObj: any) {
 }
 
 export default async function TastingPage({ params }: { params: { slug: string } }) {
-  const file = findTastingFile(params.slug);
+  const file = findTastingFile(safeDecodeSlug(params.slug));
   if (!file) notFound();
 
   const record = readJson(file);
