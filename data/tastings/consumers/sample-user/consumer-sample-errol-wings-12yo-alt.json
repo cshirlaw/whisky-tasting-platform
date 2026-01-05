@@ -3,7 +3,7 @@
   "type": "tasting",
   "version": "1.0",
   "contributor": {
-    "name": "Sample Consumer",
+    "name": "Sample Consumer 2",
     "tier": "consumer",
     "source_platform": "manual"
   },
@@ -28,7 +28,7 @@
     "bottling_notes_label": null
   },
   "tasting": {
-    "summary": "Sample consumer summary (replace later).",
+    "summary": "Second consumer tasting for comparison.",
     "notes": {
       "nose": [
         "Sample note."
@@ -48,11 +48,11 @@
     "comparisons": [],
     "consumer_scoring": {
       "version": "v1",
-      "overall_1_10": 7,
-      "confidence": "medium",
-      "blind": false,
-      "served": "neat",
-      "notes_free_text": "Easy drinking, pleasant, nothing challenging."
+      "overall_1_10": 5,
+      "confidence": "low",
+      "blind": true,
+      "served": "with_water",
+      "notes_free_text": "Thin on the palate. Pleasant enough, but not memorable."
     }
   },
   "source": {
