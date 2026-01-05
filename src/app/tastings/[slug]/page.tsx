@@ -49,7 +49,7 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
   }
 
   const { tasting } = record;
-  const status = tasting.editorial?.status || "draft";
+  const status = (tasting as any)?.editorial?.status || "draft";
 
   return (
     <main style={{ maxWidth: 860, margin: "2rem auto", padding: "0 1rem" }}>
