@@ -49,7 +49,8 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
   }
 
   const { tasting } = record;
-  const status = (tasting as any)?.editorial?.status || "draft";
+    const consumerScoring = (record.tasting as any)?.consumer_scoring || null;
+const status = (tasting as any)?.editorial?.status || "draft";
 
   return (
     <main style={{ maxWidth: 860, margin: "2rem auto", padding: "0 1rem" }}>
@@ -96,29 +97,17 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
       </section>
       <section style={{ margin: "1.25rem 0" }}>
         <h2 style={{ marginBottom: "0.5rem" }}>Consumer scoring</h2>
-        {tasting.tasting?.consumer_scoring ? (
+        {consumerScoring ? (
           <div style={{ border: "1px solid #ddd", padding: "0.75rem", borderRadius: 8, background: "#fafafa" }}>
             <p style={{ margin: "0 0 0.35rem 0" }}>
-              <strong>Overall:</strong> {tasting.tasting.consumer_scoring.overall_1_10}/10
+              <strong>Overall:</strong> {consumerScoring.overall_1_10}/10
             </p>
-            {tasting.tasting.consumer_scoring.confidence ? (
-              <p style={{ margin: "0 0 0.35rem 0" }}>
-                <strong>Confidence:</strong> {tasting.tasting.consumer_scoring.confidence}
-              </p>
-            ) : null}
-            {typeof tasting.tasting.consumer_scoring.blind === "boolean" ? (
-              <p style={{ margin: "0 0 0.35rem 0" }}>
-                <strong>Blind:</strong> {tasting.tasting.consumer_scoring.blind ? "Yes" : "No"}
-              </p>
-            ) : null}
-            {tasting.tasting.consumer_scoring.served ? (
-              <p style={{ margin: "0 0 0.35rem 0" }}>
-                <strong>Served:</strong> {tasting.tasting.consumer_scoring.served}
-              </p>
-            ) : null}
-            {tasting.tasting.consumer_scoring.notes_free_text ? (
-              <p style={{ margin: "0", whiteSpace: "pre-wrap" }}>
-                <strong>Notes:</strong> {tasting.tasting.consumer_scoring.notes_free_text}
+            <p style={{ margin: 0 }}>
+              <strong>Served:</strong> {consumerScoring.served}
+            </p>
+            {consumerScoring.rebuy != null ? (
+              <p style={{ margin: "0.35rem 0 0 0" }}>
+                <strong>Would buy again:</strong> {consumerScoring.rebuy ? "Yes" : "No"}
               </p>
             ) : null}
           </div>
