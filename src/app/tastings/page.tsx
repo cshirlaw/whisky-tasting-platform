@@ -46,7 +46,7 @@ export default function TastingsPage() {
           const href = `/tastings/${encodeURIComponent(slug)}`;
           const tier = tasting.contributor?.tier || "other";
           const platform = tasting.contributor?.source_platform || null;
-          const status = tasting.editorial?.status || "draft";
+          const status = (tasting as any)?.editorial?.status || "draft";
 
           return (
             <li key={slug} style={{ padding: "0.9rem 0", borderBottom: "1px solid #eee" }}>
