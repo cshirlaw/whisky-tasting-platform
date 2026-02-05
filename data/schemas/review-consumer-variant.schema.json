@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "review-consumer-variant.schema.json",
+  "title": "Whisky Tasting Review (Consumer Variant)",
+  "allOf": [
+    { "$ref": "review-canonical.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "tier": { "const": "consumer" }
+      }
+    }
+  ]
+}
