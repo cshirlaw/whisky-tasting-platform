@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "review-canonical.schema.json",
+  "title": "Whisky Tasting Review (Canonical)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tier", "id", "status", "created_at", "reviewer", "whisky", "tasting"],
+  "properties": {
+    "schema_version": { "type": "string", "minLength": 1 },
+    "tier": { "type": "string", "enum": ["expert", "consumer"] },
+    "id": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["draft", "published"] },
+    "created_at": { "type": "string", "format": "date-time" },
+
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewer_id", "display_name"],
+      "properties": {
+        "reviewer_id": { "type": "string", "minLength": 1 },
+        "display_name": { "type": "string", "minLength": 1 },
+        "country": { "type": "string", "minLength": 1 }
+      }
+    },
+
+    "whisky": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "category"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "brand": { "type": "string" },
+        "distillery": { "type": "string" },
+        "category": {
+          "type": "string",
+          "enum": ["blended_scotch", "single_malt_scotch", "irish", "bourbon", "rye", "rum", "gin", "other"]
+        },
+        "abv": { "type": "number", "minimum": 0, "maximum": 100 },
+        "age_statement": { "type": "integer", "minimum": 0 },
+        "vintage_year": { "type": "integer", "minimum": 1800, "maximum": 2200 },
+        "bottled_year": { "type": "integer", "minimum": 1800, "maximum": 2200 },
+        "bottler": { "type": "string" },
+        "series": { "type": "string" },
+        "cask_type": { "type": "string" },
+        "cask_number": { "type": "string" }
+      }
+    },
+
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tasting_date": { "type": "string", "format": "date" },
+        "location": { "type": "string" },
+        "setting": { "type": "string", "enum": ["home", "bar", "tasting_event", "other"] },
+        "served": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "neat": { "type": "boolean" },
+            "water_added": { "type": "boolean" },
+            "ice": { "type": "boolean" }
+          }
+        }
+      }
+    },
+
+    "tasting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nose", "palate", "finish", "overall"],
+      "properties": {
+        "nose": { "type": "string", "minLength": 1 },
+        "palate": { "type": "string", "minLength": 1 },
+        "finish": { "type": "string", "minLength": 1 },
+        "overall": { "type": "string", "minLength": 1 }
+      }
+    },
+
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overall_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "subscores": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "nose": { "type": "number", "minimum": 0, "maximum": 10 },
+            "palate": { "type": "number", "minimum": 0, "maximum": 10 },
+            "finish": { "type": "number", "minimum": 0, "maximum": 10 },
+            "value": { "type": "number", "minimum": 0, "maximum": 10 },
+            "packaging": { "type": "number", "minimum": 0, "maximum": 10 }
+          }
+        }
+      }
+    },
+
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url"],
+        "properties": {
+          "url": { "type": "string", "minLength": 1 },
+          "caption": { "type": "string" }
+        }
+      }
+    },
+
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["web_form", "import", "manual"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
