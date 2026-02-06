@@ -76,6 +76,36 @@ const status = (tasting as any)?.editorial?.status || "draft";
       </header>
 
       <section style={{ marginBottom: "1.25rem" }}>
+      {(() => {
+        const cid = (tasting.contributor as any)?.id || null;
+        if (!cid) return null;
+
+        let other = [];
+        try {
+          const { getExpertTastingsByReviewerId } = require("../../../lib/expertTastings");
+          other = getExpertTastingsByReviewerId(cid).filter((t: any) => t.slug !== params.slug);
+        } catch {
+          other = [];
+        }
+
+        if (!other || other.length === 0) return null;
+
+        return (
+          <section style={{ marginBottom: "1.25rem" }}>
+            <h2 style={{ marginBottom: "0.5rem" }}>More by this reviewer</h2>
+            <ul>
+              {other.slice(0, 8).map((t: any) => (
+                <li key={t.slug}>
+                  <Link href={"/tastings/" + t.slug} style={{ textDecoration: "underline" }}>
+                    {t.whiskyNameDisplay || t.slug}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })()}
+
         <h2 style={{ marginBottom: "0.5rem" }}>Summary</h2>
         {tasting.tasting?.summary ? <p>{tasting.tasting.summary}</p> : <p>(No summary yet.)</p>}
       </section>
