@@ -12,7 +12,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "validate:tastings": "python3 scripts/validate-tastings.py && python3 scripts/validate-tier-locks.py && python3 scripts/validate-reviewers.py"
+    "validate:tastings": "python3 scripts/validate-tastings.py && python3 scripts/validate-tier-locks.py && python3 scripts/validate-reviewers.py && python3 scripts/validate-tasting-reviewer-links.py"
   },
   "repository": {
     "type": "git",
