@@ -473,5 +473,37 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "$comment": "require contributor.id when contributor.tier=expert",
+      "if": {
+        "properties": {
+          "contributor": {
+            "type": "object",
+            "properties": {
+              "tier": {
+                "const": "expert"
+              }
+            },
+            "required": [
+              "tier"
+            ]
+          }
+        },
+        "required": [
+          "contributor"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contributor": {
+            "required": [
+              "id"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }
