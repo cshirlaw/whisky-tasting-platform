@@ -4,6 +4,14 @@
     {
       "id": "david-reid",
       "order": 1
+    },
+    {
+      "id": "charles-maclean",
+      "order": 2
+    },
+    {
+      "id": "private-contributor",
+      "order": 3
     }
   ]
 }

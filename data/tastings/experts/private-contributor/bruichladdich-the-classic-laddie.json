@@ -5,7 +5,8 @@
   "contributor": {
     "name": "Private Contributor",
     "tier": "expert",
-    "source_platform": "manual"
+    "source_platform": "manual",
+    "id": "private-contributor"
   },
   "dates": {
     "post_date": null,
