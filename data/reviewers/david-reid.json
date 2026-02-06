@@ -1,0 +1,15 @@
+{
+  "id": "david-reid",
+  "displayName": "David Reid",
+  "sortName": "Reid, David",
+  "type": "expert",
+  "country": "GB",
+  "language": "en",
+  "bio": "Whisky reviewer (LinkedIn). Reviews are imported and structured for the platform.",
+  "links": [
+    {
+      "label": "LinkedIn",
+      "url": ""
+    }
+  ]
+}
