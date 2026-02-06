@@ -62,7 +62,13 @@ const status = (tasting as any)?.editorial?.status || "draft";
         <h1 style={{ marginBottom: "0.35rem" }}>{tasting.whisky?.name_display}</h1>
 
         <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", alignItems: "center", color: "#555" }}>
-          <span>{tasting.contributor?.name}</span>
+          {(tasting.contributor as any)?.id ? (
+            <Link href={"/reviewers/" + (tasting.contributor as any).id} style={{ textDecoration: "underline" }}>
+              {tasting.contributor?.name}
+            </Link>
+          ) : (
+            <span>{tasting.contributor?.name}</span>
+          )}
           <span style={{ padding: "0.12rem 0.5rem", border: "1px solid #ddd", borderRadius: 999, fontSize: "0.78rem" }}>
             {editorialLabel(status)}
           </span>
