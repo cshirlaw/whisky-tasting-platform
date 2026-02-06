@@ -55,6 +55,10 @@
             "null"
           ],
           "description": "Where the original content came from, if applicable (e.g. LinkedIn)."
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
