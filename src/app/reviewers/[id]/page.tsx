@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { loadReviewer } from "@/lib/reviewers";
 import { loadExpertTastingsByContributorId } from "@/lib/expertTastings";
@@ -61,7 +62,11 @@ export default async function ReviewerDetailPage({ params }: { params: { id: str
           <ul className="mt-6 space-y-3">
             {tastings.map((t) => (
               <li key={t.fileRelPath} className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
-                <div className="text-base font-semibold">{t.whiskyLabel ?? t.filename}</div>
+                <div className="text-base font-semibold">
+                  <Link className="underline underline-offset-4" href={"/tastings/" + String(t.filename || "").replace(/\.json$/i, "")}>
+                    {t.whiskyLabel ?? t.filename}
+                  </Link>
+                </div>
                 <div className="mt-1 text-sm text-neutral-600">
                   file: <span className="font-mono">{t.fileRelPath}</span>
                 </div>
