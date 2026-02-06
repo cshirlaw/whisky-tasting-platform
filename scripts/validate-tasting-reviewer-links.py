@@ -23,14 +23,15 @@ def main() -> int:
         return 2
 
     reviewers = {}
+
     def norm_id(x):
         if isinstance(x, str):
             return x.strip()
         if isinstance(x, dict):
-            v = x.get('id')
+            v = x.get("id")
             if isinstance(v, str):
                 return v.strip()
-        return ''
+        return ""
 
     for entry in reviewer_ids:
         rid = norm_id(entry)
@@ -62,38 +63,42 @@ def main() -> int:
             continue
 
         checked += 1
+        file_ok = True
 
         if not isinstance(cid, str) or not cid.strip():
+            file_ok = False
             ok = False
             print(f"\nFAIL: {f}")
             print("  - contributor.id: must be a non-empty string")
-            continue
 
-        if cid not in reviewers:
+        elif cid not in reviewers:
+            file_ok = False
             ok = False
             print(f"\nFAIL: {f}")
             print(f"  - contributor.id: '{cid}' not found in data/reviewers/index.json")
-            continue
 
-        r = reviewers[cid]
+        else:
+            r = reviewers[cid]
 
-        cname = c.get("name")
-        if isinstance(cname, str) and cname.strip():
-            rname = r.get("displayName")
-            if isinstance(rname, str) and rname.strip() and cname.strip() != rname.strip():
-                ok = False
-                print(f"\nFAIL: {f}")
-                print(f"  - contributor.name: '{cname}' does not match reviewer.displayName '{rname}' for id '{cid}'")
+            cname = c.get("name")
+            if isinstance(cname, str) and cname.strip():
+                rname = r.get("displayName")
+                if isinstance(rname, str) and rname.strip() and cname.strip() != rname.strip():
+                    file_ok = False
+                    ok = False
+                    print(f"\nFAIL: {f}")
+                    print(f"  - contributor.name: '{cname}' does not match reviewer.displayName '{rname}' for id '{cid}'")
 
-        ctier = c.get("tier")
-        if isinstance(ctier, str) and ctier.strip():
-            rtype = r.get("type")
-            if isinstance(rtype, str) and rtype.strip() and ctier.strip() != rtype.strip():
-                ok = False
-                print(f"\nFAIL: {f}")
-                print(f"  - contributor.tier: '{ctier}' does not match reviewer.type '{rtype}' for id '{cid}'")
+            ctier = c.get("tier")
+            if isinstance(ctier, str) and ctier.strip():
+                rtype = r.get("type")
+                if isinstance(rtype, str) and rtype.strip() and ctier.strip() != rtype.strip():
+                    file_ok = False
+                    ok = False
+                    print(f"\nFAIL: {f}")
+                    print(f"  - contributor.tier: '{ctier}' does not match reviewer.type '{rtype}' for id '{cid}'")
 
-        if ok:
+        if file_ok:
             print(f"OK:   {f}")
 
     if not ok:
