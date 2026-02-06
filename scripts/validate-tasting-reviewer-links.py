@@ -44,7 +44,7 @@ def main() -> int:
             return 2
         reviewers[rid] = load_json(p)
 
-    files = sorted(TASTINGS_DIR.rglob("*.json"))
+    files = sorted((TASTINGS_DIR / "experts").rglob("*.json"))
     if not files:
         print("No tasting JSON files found under data/tastings/")
         return 0
