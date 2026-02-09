@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import path from "path";
 
 export type BottleKey = {
+  key: string;
   slug: string;
   name: string;
   category?: string;
@@ -16,6 +17,7 @@ export type BottleTasting = {
   filename: string;
   bottleName: string;
   bottleSlug: string;
+  bottleKey: string;
   category?: string;
   contributorId?: string;
   contributorName?: string;
@@ -67,18 +69,38 @@ function slugify(s: string): string {
     .replace(/-+/g, "-");
 }
 
-function bottleSlugFromWhisky(whisky: any): { slug: string; name: string } {
-  const name =
+function stripAgeWords(name: string): string {
+  return String(name || "")
+    .replace(/\b\d{1,3}\s*(?:yo|y\/o)\b/gi, "")
+    .replace(/\b\d{1,3}\s*(?:yr|yrs)\b/gi, "")
+    .replace(/\b\d{1,3}\s*(?:year|years)\s*(?:old)?\b/gi, "")
+    .replace(/\b\d{1,3}\s*-\s*(?:year|years)\s*-\s*old\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function formatAgeTitle(baseName: string, ageYears: number): string {
+  const a = Math.round(ageYears);
+  return `${baseName} ${a} Year Old`;
+}
+
+function bottleFromWhisky(whisky: any): { key: string; slug: string; name: string } {
+  const rawName =
     safeString(whisky?.name_display) ||
     safeString(whisky?.brand_or_label) ||
     safeString(whisky?.bottling_notes_label) ||
-    "unknown-bottle";
+    "Unknown Bottle";
 
   const age = safeNumber(whisky?.age_years);
-  const base = slugify(name);
-  const slug = age ? `${base}-${Math.round(age)}yo` : base;
 
-  return { slug, name };
+  const baseName = stripAgeWords(rawName);
+  const base = slugify(baseName || rawName);
+
+  const key = age ? `${base}-${Math.round(age)}yo` : base;
+  const slug = age ? `${base}-${Math.round(age)}-year-old` : base;
+  const name = age ? formatAgeTitle(baseName || rawName, age) : (baseName || rawName);
+
+  return { key, slug, name };
 }
 
 function tastingSlugFromFilename(filename: string): string {
@@ -88,6 +110,13 @@ function tastingSlugFromFilename(filename: string): string {
 function starsFrom1to10(v: number): number {
   const clamped = Math.max(1, Math.min(10, v));
   return Math.max(1, Math.min(5, Math.round(clamped / 2)));
+}
+
+function preferredBottleSlug(tastings: BottleTasting[]): string {
+  for (const t of tastings) {
+    if (typeof t.bottleSlug === "string" && t.bottleSlug.endsWith("-year-old")) return t.bottleSlug;
+  }
+  return tastings[0]?.bottleSlug || tastings[0]?.bottleKey || "unknown-bottle";
 }
 
 export async function loadAllBottleTastings(): Promise<BottleTasting[]> {
@@ -100,7 +129,7 @@ export async function loadAllBottleTastings(): Promise<BottleTasting[]> {
     const j = JSON.parse(raw);
 
     const whisky = j?.whisky || {};
-    const { slug: bottleSlug, name: bottleName } = bottleSlugFromWhisky(whisky);
+    const { key: bottleKey, slug: bottleSlug, name: bottleName } = bottleFromWhisky(whisky);
 
     const contributor = j?.contributor || {};
     const contributorId = safeString(contributor?.id);
@@ -120,6 +149,7 @@ export async function loadAllBottleTastings(): Promise<BottleTasting[]> {
       filename,
       bottleName,
       bottleSlug,
+      bottleKey,
       category: safeString(whisky?.category),
       contributorId,
       contributorName,
@@ -142,17 +172,18 @@ export type BottleSummary = {
 
 export async function loadBottleSummaries(): Promise<BottleSummary[]> {
   const all = await loadAllBottleTastings();
-  const bySlug = new Map<string, BottleTasting[]>();
+  const byKey = new Map<string, BottleTasting[]>();
 
   for (const t of all) {
-    const arr = bySlug.get(t.bottleSlug) || [];
+    const arr = byKey.get(t.bottleKey) || [];
     arr.push(t);
-    bySlug.set(t.bottleSlug, arr);
+    byKey.set(t.bottleKey, arr);
   }
 
   const out: BottleSummary[] = [];
-  for (const [slug, arr] of bySlug.entries()) {
+  for (const [key, arr] of byKey.entries()) {
     const first = arr[0];
+
     const rated = arr.filter((x) => typeof x.overall1to10 === "number" && x.overall1to10 !== null);
     const ratedCount = rated.length;
 
@@ -165,7 +196,10 @@ export async function loadBottleSummaries(): Promise<BottleSummary[]> {
       if (s && distStars1to5[s] !== undefined) distStars1to5[s] += 1;
     }
 
+    const slug = preferredBottleSlug(arr);
+
     const bottle: BottleKey = {
+      key,
       slug,
       name: first?.bottleName || slug,
       category: first?.category,
@@ -180,22 +214,54 @@ export async function loadBottleSummaries(): Promise<BottleSummary[]> {
     });
   }
 
-  out.sort((a, b) => (b.ratedCount - a.ratedCount) || (b.tastingCount - a.tastingCount) || a.bottle.name.localeCompare(b.bottle.name));
+  out.sort(
+    (a, b) =>
+      b.ratedCount - a.ratedCount ||
+      b.tastingCount - a.tastingCount ||
+      a.bottle.name.localeCompare(b.bottle.name),
+  );
   return out;
 }
 
 export async function loadBottleDetail(slug: string): Promise<{ bottle: BottleKey; tastings: BottleTasting[] }> {
   const all = await loadAllBottleTastings();
-  const tastings = all.filter((t) => t.bottleSlug === slug);
 
+  const byKey = new Map<string, BottleTasting[]>();
+  for (const t of all) {
+    const arr = byKey.get(t.bottleKey) || [];
+    arr.push(t);
+    byKey.set(t.bottleKey, arr);
+  }
+
+  let key: string | null = null;
+
+  if (byKey.has(slug)) key = slug;
+
+  if (!key) {
+    for (const [k, arr] of byKey.entries()) {
+      if (arr.some((t) => t.bottleSlug === slug)) {
+        key = k;
+        break;
+      }
+    }
+  }
+
+  if (!key) {
+    return { bottle: { key: slug, slug, name: slug }, tastings: [] };
+  }
+
+  const tastings = byKey.get(key) || [];
   if (tastings.length === 0) {
-    return { bottle: { slug, name: slug }, tastings: [] };
+    return { bottle: { key, slug, name: slug }, tastings: [] };
   }
 
   const first = tastings[0];
+  const preferredSlug = preferredBottleSlug(tastings);
+
   return {
     bottle: {
-      slug,
+      key,
+      slug: preferredSlug,
       name: first.bottleName,
       category: first.category,
     },
