@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import StarFilter from "@/components/StarFilter";
 import { loadBottleDetail } from "@/lib/bottles";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
@@ -22,6 +23,7 @@ export default async function BottleDetailPage({
   const stars = starsFilter && Number.isFinite(starsFilter) ? Math.max(1, Math.min(5, starsFilter)) : null;
 
   const rated = tastings.filter((t) => typeof t.overallStars1to5 === "number" && t.overallStars1to5 !== null);
+
   const dist: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   for (const r of rated) {
     const s = r.overallStars1to5 as number;
@@ -39,18 +41,17 @@ export default async function BottleDetailPage({
 
   const visibleSorted = visible
     .map((t, i) => ({ t, i }))
-    .sort((a, b) => (tierRank(a.t) - tierRank(b.t)) || (a.i - b.i))
+    .sort((a, b) => tierRank(a.t) - tierRank(b.t) || a.i - b.i)
     .map((x) => x.t);
 
   const avg10 =
-    rated.length === 0
-      ? null
-      : rated.reduce((a, b) => a + (b.overall1to10 as number), 0) / rated.length;
+    rated.length === 0 ? null : rated.reduce((a, b) => a + (b.overall1to10 as number), 0) / rated.length;
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight">{bottle.name}</h1>
+
         <div className="text-sm text-neutral-600">
           {bottle.category ? <span>{bottle.category} · </span> : null}
           {tastings.length} tasting(s)
@@ -59,23 +60,11 @@ export default async function BottleDetailPage({
 
         <div className="mt-4 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
           <div className="text-sm font-semibold">Ratings</div>
-          <div className="mt-2 text-sm text-neutral-700">
-            Filter by stars:
-            <span className="ml-2 flex flex-wrap gap-2">
-              <Link className="underline underline-offset-4" href={"/bottles/" + bottle.slug}>
-                All
-              </Link>
-              {[5, 4, 3, 2, 1].map((s) => (
-                <Link
-                  key={s}
-                  className="underline underline-offset-4"
-                  href={"/bottles/" + bottle.slug + "?stars=" + s}
-                >
-                  {s}★ ({dist[s]})
-                </Link>
-              ))}
-            </span>
+
+          <div className="mt-2">
+            <StarFilter baseHref={"/bottles/" + bottle.slug} activeStars={stars} counts={dist} />
           </div>
+
           {stars ? (
             <div className="mt-3 text-xs text-neutral-600">
               Showing only {stars}★ reviews (derived from overall_1_10 where present).
@@ -115,6 +104,7 @@ export default async function BottleDetailPage({
                     )}
                   </div>
                 </div>
+
                 <div className="mt-1 text-sm text-neutral-600">
                   file: <span className="font-mono">{t.fileRelPath}</span>
                 </div>
