@@ -1,4 +1,5 @@
 import "./globals.css";
+import SiteHeader from "@/components/SiteHeader";
 
 export const metadata = {
   title: "Whisky Tasting Platform",
@@ -8,23 +9,12 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB">
-      <body className="min-h-screen bg-white text-slate-900">
+      <body className="min-h-screen bg-neutral-50 text-neutral-900">
+        <SiteHeader />
         <div className="mx-auto max-w-4xl px-4 py-8">
-          <header className="mb-8 border-b pb-4">
-            <div className="text-xl font-semibold">Whisky Tasting Platform</div>
-            <nav className="mt-2 flex gap-4 text-sm">
-              <a className="underline" href="/">Home</a>
-              <a className="underline" href="/tastings">Tastings</a>
-              <a className="underline" href="/bottles">Bottles</a>
-              <a className="underline" href="/reviewers">Reviewers</a>
-            </nav>
-          </header>
-
-          {children}
-
-          <footer className="mt-12 border-t pt-4 text-xs text-slate-600">
-            Built for archive and comparison. Trial content only at this stage.
-          </footer>
+          <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8">
+            {children}
+          </div>
         </div>
       </body>
     </html>

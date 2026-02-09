@@ -1,0 +1,80 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+function crumbLabel(seg: string) {
+  if (!seg) return "Home";
+  if (seg === "tastings") return "Tastings";
+  if (seg === "reviewers") return "Reviewers";
+  if (seg === "bottles") return "Bottles";
+  return seg.replace(/-/g, " ");
+}
+
+export default function SiteHeader() {
+  const pathname = usePathname() || "/";
+  const parts = pathname.split("?")[0].split("#")[0].split("/").filter(Boolean);
+
+  const crumbs: { href: string; label: string }[] = [{ href: "/", label: "Home" }];
+  let acc = "";
+  for (const p of parts) {
+    acc += "/" + p;
+    crumbs.push({ href: acc, label: crumbLabel(p) });
+  }
+
+  const nav = [
+    { href: "/", label: "Home" },
+    { href: "/bottles", label: "Bottles" },
+    { href: "/tastings", label: "Tastings" },
+    { href: "/reviewers", label: "Reviewers" }
+  ];
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/90 backdrop-blur">
+      <div className="mx-auto max-w-4xl px-4">
+        <div className="flex items-center justify-between py-4">
+          <div className="flex flex-col">
+            <Link href="/" className="text-base font-semibold tracking-tight">
+              Whisky Tasting Platform
+            </Link>
+            <div className="mt-1 text-xs text-neutral-600">
+              Built for archive and comparison. Trial content only at this stage.
+            </div>
+          </div>
+
+          <nav className="flex items-center gap-3 text-sm">
+            {nav.map((n) => {
+              const active = pathname === n.href || (n.href !== "/" && pathname.startsWith(n.href + "/")) || pathname === n.href;
+              return (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  className={
+                    active
+                      ? "rounded-full bg-neutral-900 px-3 py-1 text-white"
+                      : "rounded-full border border-neutral-200 bg-white px-3 py-1 text-neutral-900 hover:bg-neutral-50"
+                  }
+                >
+                  {n.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+
+        <div className="pb-4">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-600">
+            {crumbs.map((c, i) => (
+              <span key={c.href} className="flex items-center gap-2">
+                <Link href={c.href} className="hover:underline hover:underline-offset-4">
+                  {c.label}
+                </Link>
+                {i < crumbs.length - 1 ? <span className="text-neutral-300">/</span> : null}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
