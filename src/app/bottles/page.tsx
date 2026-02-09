@@ -8,15 +8,22 @@ export const metadata = {
 export default async function BottlesIndexPage() {
   const items = await loadBottleSummaries();
 
+  const sorted = [...items].sort((a, b) =>
+    String(a.bottle.name || "").localeCompare(String(b.bottle.name || ""), "en", { sensitivity: "base" }),
+  );
+
   return (
     <main>
-      <h1 className="text-xl font-semibold">Bottles</h1>
+      <div className="flex items-baseline justify-between gap-4">
+        <h1 className="text-xl font-semibold">Bottles</h1>
+        <div className="text-sm text-neutral-600">{sorted.length} bottle(s)</div>
+      </div>
 
-      {items.length === 0 ? (
+      {sorted.length === 0 ? (
         <p className="mt-6 text-neutral-700">No bottles found yet.</p>
       ) : (
         <div className="mt-6 grid gap-3">
-          {items.map((b) => {
+          {sorted.map((b) => {
             const metaParts = [
               b.bottle.category || null,
               b.bottle.abvPercent ? `${b.bottle.abvPercent}%` : null,
