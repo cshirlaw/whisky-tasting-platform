@@ -30,6 +30,18 @@ export default async function BottleDetailPage({
 
   const visible = stars ? tastings.filter((t) => t.overallStars1to5 === stars) : tastings;
 
+  const tierRank = (t: import("@/lib/bottles").BottleTasting) => {
+    const raw = String(t?.contributorTier || "").toLowerCase();
+    if (raw.includes("expert")) return 0;
+    if (raw.includes("consumer")) return 1;
+    return 2;
+  };
+
+  const visibleSorted = visible
+    .map((t, i) => ({ t, i }))
+    .sort((a, b) => (tierRank(a.t) - tierRank(b.t)) || (a.i - b.i))
+    .map((x) => x.t);
+
   const avg10 =
     rated.length === 0
       ? null
@@ -79,11 +91,11 @@ export default async function BottleDetailPage({
       <section className="mt-10">
         <h2 className="text-xl font-semibold tracking-tight">Reviews</h2>
 
-        {visible.length === 0 ? (
+        {visibleSorted.length === 0 ? (
           <p className="mt-6 text-neutral-700">No reviews match that filter yet.</p>
         ) : (
           <ul className="mt-6 space-y-3">
-            {visible.map((t) => (
+            {visibleSorted.map((t) => (
               <li key={t.fileRelPath} className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div className="text-base font-semibold">
