@@ -69,14 +69,22 @@ function slugify(s: string): string {
     .replace(/-+/g, "-");
 }
 
-function stripAgeWords(name: string): string {
-  return String(name || "")
+function stripAgeWords(name: string, ageYears?: number): string {
+  let out = String(name || "")
     .replace(/\b\d{1,3}\s*(?:yo|y\/o)\b/gi, "")
     .replace(/\b\d{1,3}\s*(?:yr|yrs)\b/gi, "")
     .replace(/\b\d{1,3}\s*(?:year|years)\s*(?:old)?\b/gi, "")
     .replace(/\b\d{1,3}\s*-\s*(?:year|years)\s*-\s*old\b/gi, "")
     .replace(/\s{2,}/g, " ")
     .trim();
+
+  if (typeof ageYears === "number" && Number.isFinite(ageYears)) {
+    const a = Math.round(ageYears);
+    const reAge = new RegExp(`\\b${a}\\b(?=\\s*$|\\s*[\\)\\]\\}\\-–—,:;]|$)`, "g");
+    out = out.replace(reAge, "").replace(/\s{2,}/g, " ").trim();
+  }
+
+  return out;
 }
 
 function formatAgeTitle(baseName: string, ageYears: number): string {
@@ -93,7 +101,7 @@ function bottleFromWhisky(whisky: any): { key: string; slug: string; name: strin
 
   const age = safeNumber(whisky?.age_years);
 
-  const baseName = stripAgeWords(rawName);
+  const baseName = stripGenericTypeWords(stripAgeWords(rawName, age ?? undefined));
   const base = slugify(baseName || rawName);
 
   const key = age ? `${base}-${Math.round(age)}yo` : base;
@@ -101,6 +109,16 @@ function bottleFromWhisky(whisky: any): { key: string; slug: string; name: strin
   const name = age ? formatAgeTitle(baseName || rawName, age) : (baseName || rawName);
 
   return { key, slug, name };
+}
+
+function stripGenericTypeWords(name: string): string {
+  return String(name || "")
+    .replace(/\bBlended\s+Scotch\s+Whisky\b/gi, "")
+    .replace(/\bBlended\s+Malt\s+Scotch\s+Whisky\b/gi, "")
+    .replace(/\bSingle\s+Malt\s+Scotch\s+Whisky\b/gi, "")
+    .replace(/\bScotch\s+Whisky\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 function tastingSlugFromFilename(filename: string): string {
@@ -113,9 +131,15 @@ function starsFrom1to10(v: number): number {
 }
 
 function preferredBottleSlug(tastings: BottleTasting[]): string {
-  for (const t of tastings) {
-    if (typeof t.bottleSlug === "string" && t.bottleSlug.endsWith("-year-old")) return t.bottleSlug;
+  const yearOld = tastings
+    .map((t) => (typeof t.bottleSlug === "string" ? t.bottleSlug : ""))
+    .filter((x) => x.endsWith("-year-old"));
+
+  if (yearOld.length > 0) {
+    yearOld.sort((a, b) => a.length - b.length || a.localeCompare(b));
+    return yearOld[0];
   }
+
   return tastings[0]?.bottleSlug || tastings[0]?.bottleKey || "unknown-bottle";
 }
 
