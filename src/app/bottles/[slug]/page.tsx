@@ -1,12 +1,47 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import StarFilter from "@/components/StarFilter";
-import { loadBottleDetail } from "@/lib/bottles";
+import { loadBottleDetail, type BottleTasting } from "@/lib/bottles";
+import fs from "fs";
+import path from "path";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { bottle, tastings } = await loadBottleDetail(params.slug);
   if (!tastings.length) return { title: "Bottle" };
   return { title: `${bottle.name} — Bottle` };
+}
+
+function starsTextFrom10(v: number): { stars: string; stars5: number } {
+  const clamped10 = Math.max(1, Math.min(10, v));
+  const s5 = Math.max(1, Math.min(5, Math.round(clamped10 / 2)));
+  const filled = "★".repeat(s5);
+  const empty = "☆".repeat(5 - s5);
+  return { stars: filled + empty, stars5: s5 };
+}
+
+function tierOf(t: BottleTasting): "expert" | "consumer" | "other" {
+  const raw = String(t?.contributorTier || "").toLowerCase();
+  if (raw.includes("expert")) return "expert";
+  if (raw.includes("consumer")) return "consumer";
+  return "other";
+}
+
+function findBottleImageSrc(slug: string): string | null {
+  const dir = path.join(process.cwd(), "public", "bottles");
+  const candidates = [
+    `${slug}.jpg`,
+    `${slug}.jpeg`,
+    `${slug}.png`,
+    `${slug}.webp`,
+    `${slug}.avif`,
+  ];
+
+  for (const f of candidates) {
+    const full = path.join(dir, f);
+    if (fs.existsSync(full)) return `/bottles/${f}`;
+  }
+  return null;
 }
 
 export default async function BottleDetailPage({
@@ -32,10 +67,10 @@ export default async function BottleDetailPage({
 
   const visible = stars ? tastings.filter((t) => t.overallStars1to5 === stars) : tastings;
 
-  const tierRank = (t: import("@/lib/bottles").BottleTasting) => {
-    const raw = String(t?.contributorTier || "").toLowerCase();
-    if (raw.includes("expert")) return 0;
-    if (raw.includes("consumer")) return 1;
+  const tierRank = (t: BottleTasting) => {
+    const k = tierOf(t);
+    if (k === "expert") return 0;
+    if (k === "consumer") return 1;
     return 2;
   };
 
@@ -44,38 +79,105 @@ export default async function BottleDetailPage({
     .sort((a, b) => tierRank(a.t) - tierRank(b.t) || a.i - b.i)
     .map((x) => x.t);
 
-  const avg10 =
-    rated.length === 0 ? null : rated.reduce((a, b) => a + (b.overall1to10 as number), 0) / rated.length;
+  const expertRated10 = tastings
+    .filter((t) => tierOf(t) === "expert")
+    .map((t) => t.overall1to10)
+    .filter((v): v is number => typeof v === "number" && v !== null);
+
+  const consumerRated10 = tastings
+    .filter((t) => tierOf(t) === "consumer")
+    .map((t) => t.overall1to10)
+    .filter((v): v is number => typeof v === "number" && v !== null);
+
+  const expertAvg10 =
+    expertRated10.length === 0 ? null : expertRated10.reduce((a, b) => a + b, 0) / expertRated10.length;
+
+  const consumerAvg10 =
+    consumerRated10.length === 0 ? null : consumerRated10.reduce((a, b) => a + b, 0) / consumerRated10.length;
+
+  const expertStars = expertAvg10 === null ? null : starsTextFrom10(expertAvg10);
+  const consumerStars = consumerAvg10 === null ? null : starsTextFrom10(consumerAvg10);
+
+  const imgSrc = findBottleImageSrc(bottle.slug);
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">{bottle.name}</h1>
-
-        <div className="text-sm text-neutral-600">
-          {bottle.category ? <span>{bottle.category} · </span> : null}
-          {tastings.length} tasting(s)
-          {avg10 !== null ? <span> · avg {avg10.toFixed(1)}/10</span> : null}
-        </div>
-
-        <div className="mt-4 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
-          <div className="text-sm font-semibold">Ratings</div>
-
-          <div className="mt-2">
-            <StarFilter baseHref={"/bottles/" + bottle.slug} activeStars={stars} counts={dist} />
+      <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+        <div className="grid gap-5 md:grid-cols-[200px_1fr] md:items-start">
+          <div className="w-full">
+            {imgSrc ? (
+              <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+                <Image
+                  src={imgSrc}
+                  alt={bottle.name}
+                  width={800}
+                  height={1000}
+                  className="h-auto w-full"
+                  priority
+                />
+              </div>
+            ) : (
+              <div className="flex aspect-[4/5] w-full items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 text-sm text-neutral-500">
+                No image yet
+              </div>
+            )}
           </div>
 
-          {stars ? (
-            <div className="mt-3 text-xs text-neutral-600">
-              Showing only {stars}★ reviews (derived from overall_1_10 where present).
+          <div className="flex flex-col gap-3">
+            <div>
+              <h1 className="text-3xl font-semibold tracking-tight">{bottle.name}</h1>
+              <div className="mt-1 text-sm text-neutral-600">
+                {bottle.category ? <span>{bottle.category} · </span> : null}
+                {tastings.length} tasting(s)
+              </div>
             </div>
-          ) : (
-            <div className="mt-3 text-xs text-neutral-600">
-              Stars are derived from consumer overall_1_10 when present. Expert scores may be blank for now.
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {expertStars ? (
+                <div className="rounded-2xl border border-neutral-200 bg-white p-4">
+                  <div className="text-xs font-semibold text-neutral-600">Expert view</div>
+                  <div className="mt-1 flex items-baseline justify-between gap-3">
+                    <div className="text-lg font-semibold text-neutral-900">{expertStars.stars}</div>
+                    <div className="text-sm font-semibold text-neutral-900">{expertAvg10!.toFixed(1)}/10</div>
+                  </div>
+                  <div className="mt-1 text-xs text-neutral-600">{expertRated10.length} expert review(s)</div>
+                </div>
+              ) : null}
+
+              {consumerStars ? (
+                <div className="rounded-2xl border border-neutral-200 bg-white p-4">
+                  <div className="text-xs font-semibold text-neutral-600">Consumer view</div>
+                  <div className="mt-1 flex items-baseline justify-between gap-3">
+                    <div className="text-base font-semibold text-neutral-800">{consumerStars.stars}</div>
+                    <div className="text-sm font-semibold text-neutral-800">{consumerAvg10!.toFixed(1)}/10</div>
+                  </div>
+                  <div className="mt-1 text-xs text-neutral-600">{consumerRated10.length} consumer review(s)</div>
+                </div>
+              ) : null}
             </div>
-          )}
+
+            <div className="mt-1 text-xs text-neutral-600">
+              Stars are whole-star equivalents derived from overall_1_10 where present.
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+        <div className="text-sm font-semibold">Ratings</div>
+        <div className="mt-3">
+          <StarFilter baseHref={"/bottles/" + bottle.slug} activeStars={stars} counts={dist} />
+        </div>
+        {stars ? (
+          <div className="mt-3 text-xs text-neutral-600">
+            Showing only {stars}★ reviews (derived from overall_1_10 where present).
+          </div>
+        ) : (
+          <div className="mt-3 text-xs text-neutral-600">
+            Filter shows stars derived from consumer overall_1_10 when present. Expert scores may be blank for now.
+          </div>
+        )}
+      </section>
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold tracking-tight">Reviews</h2>
