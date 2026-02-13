@@ -49,7 +49,7 @@ export default async function BottlesIndexPage() {
                 href={`/bottles/${b.bottle.slug}`}
                 meta={metaParts.join(" · ")}
                 rightTop={b.avgOverall1to10 !== null ? `${b.avgOverall1to10.toFixed(1)}/10` : "—"}
-                rightBottom={`${b.tastingCount} review(s)`}
+                rightBottom={`${b.tastingCount} tasting(s)`}
                 imageSrc={pickBottleImage(b.bottle.slug)}
               />
             );

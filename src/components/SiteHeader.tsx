@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 
 function crumbLabel(seg: string) {
   if (!seg) return "Home";
-  if (seg === "tastings") return "Tastings";
-  if (seg === "reviewers") return "Reviewers";
   if (seg === "bottles") return "Bottles";
   return seg.replace(/-/g, " ");
 }
@@ -25,8 +23,6 @@ export default function SiteHeader() {
   const nav = [
     { href: "/", label: "Home" },
     { href: "/bottles", label: "Bottles" },
-    { href: "/tastings", label: "Tastings" },
-    { href: "/reviewers", label: "Reviewers" }
   ];
 
   return (
