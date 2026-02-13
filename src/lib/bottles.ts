@@ -145,10 +145,12 @@ function preferredBottleSlug(tastings: BottleTasting[]): string {
 
 export async function loadAllBottleTastings(): Promise<BottleTasting[]> {
   const baseDir = repoRootPath("data", "tastings");
+  const CONSUMER_TEMPLATES_DIR = repoRootPath("data", "tastings", "consumers", "templates");
   const files = await listJsonFiles(baseDir);
 
   const items: BottleTasting[] = [];
   for (const full of files) {
+    if (full.startsWith(CONSUMER_TEMPLATES_DIR + path.sep)) continue;
     const raw = await fs.readFile(full, "utf-8");
     const j = JSON.parse(raw);
 
