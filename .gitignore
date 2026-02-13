@@ -7,3 +7,5 @@ public/sources/**/post-text.ocr.txt
 public/sources/**/post-text.corrected.txt
 
 _trash/
+_audit_bottles.txt
+scripts/audit-bottles.cjs
