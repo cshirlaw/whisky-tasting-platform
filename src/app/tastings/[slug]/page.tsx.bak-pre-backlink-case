@@ -36,7 +36,7 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
           <p className="text-sm text-neutral-700">
             Not found.{" "}
             <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/tastings">
-              Back to Tastings
+              Back to tastings
             </Link>
           </p>
         </section>
