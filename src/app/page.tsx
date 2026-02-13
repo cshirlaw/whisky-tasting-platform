@@ -6,10 +6,8 @@ export default function HomePage() {
 
       <ul>
         <li>
-          <a href="/tastings">Tastings</a>
         </li>
         <li>
-          <a href="/reviewers">Reviewers</a>
         </li>
       </ul>
     </main>
