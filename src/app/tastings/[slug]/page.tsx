@@ -1,7 +1,6 @@
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import { notFound } from "next/navigation";
 import { getTastingBySlug } from "../../../lib/tastings";
 
 function ocrPathForAsset(assetPath: string) {
@@ -29,7 +28,21 @@ function editorialLabel(status?: string | null) {
 
 export default function TastingPage({ params }: { params: { slug: string } }) {
   const record = getTastingBySlug(params.slug);
-  if (!record) notFound();
+
+  if (!record) {
+    return (
+      <main className="mx-auto max-w-5xl px-4 py-10">
+        <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <p className="text-sm text-neutral-700">
+            Not found.{" "}
+            <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/tastings">
+              Back to tastings
+            </Link>
+          </p>
+        </section>
+      </main>
+    );
+  }
 
   const { tasting } = record;
 
@@ -41,28 +54,32 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
 
   const consumerScoring = (record.tasting as any)?.consumer_scoring || null;
   const status = (tasting as any)?.editorial?.status || "draft";
-
   const contributorId = (tasting.contributor as any)?.id || null;
-  let other: any[] = [];
+
+  let otherByContributor: any[] = [];
   if (contributorId) {
     try {
       const { getExpertTastingsByReviewerId } = require("../../../lib/expertTastings");
-      other = getExpertTastingsByReviewerId(contributorId).filter((t: any) => t.slug !== params.slug);
+      otherByContributor = getExpertTastingsByReviewerId(contributorId).filter((t: any) => t.slug !== params.slug);
     } catch {
-      other = [];
+      otherByContributor = [];
     }
   }
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <div className="text-sm">
-        <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/tastings">
-          Back to Tastings
-        </Link>
-      </div>
+      <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Link className="text-sm underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/tastings">
+            ← Back to Tastings
+          </Link>
 
-      <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">
+          <span className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs text-neutral-700 shadow-sm">
+            {editorialLabel(status)}
+          </span>
+        </div>
+
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-neutral-900">
           {tasting.whisky?.name_display || params.slug}
         </h1>
 
@@ -78,23 +95,25 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
             <span>{tasting.contributor?.name || "Unknown contributor"}</span>
           )}
 
-          <span className="text-neutral-300">/</span>
+          {tasting.contributor?.tier ? <span className="text-neutral-400">·</span> : null}
+          {tasting.contributor?.tier ? <span className="text-neutral-600">{tasting.contributor.tier}</span> : null}
 
-          <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs text-neutral-700 shadow-sm">
-            {editorialLabel(status)}
-          </span>
+          {(tasting.contributor as any)?.source_platform ? <span className="text-neutral-400">·</span> : null}
+          {(tasting.contributor as any)?.source_platform ? (
+            <span className="text-neutral-600">{String((tasting.contributor as any)?.source_platform)}</span>
+          ) : null}
         </div>
 
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+        <p className="mt-4 text-sm leading-relaxed text-neutral-600">
           Expert tastings only at this stage. This page is for internal reference.
         </p>
       </section>
 
-      {other.length > 0 ? (
+      {otherByContributor.length > 0 ? (
         <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-          <h2 className="text-xl font-semibold tracking-tight text-neutral-900">More by this contributor</h2>
-          <ul className="mt-4 space-y-2 text-sm">
-            {other.slice(0, 8).map((t: any) => (
+          <h2 className="text-lg font-semibold tracking-tight text-neutral-900">More by this contributor</h2>
+          <ul className="mt-3 space-y-2 text-sm">
+            {otherByContributor.slice(0, 8).map((t: any) => (
               <li key={t.slug}>
                 <Link
                   href={"/tastings/" + t.slug}
@@ -109,83 +128,93 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
       ) : null}
 
       <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <h2 className="text-xl font-semibold tracking-tight text-neutral-900">Summary</h2>
+        <h2 className="text-lg font-semibold tracking-tight text-neutral-900">Summary</h2>
         <div className="mt-3 text-sm leading-relaxed text-neutral-700">
-          {tasting.tasting?.summary ? <p>{tasting.tasting.summary}</p> : <p>(No summary yet.)</p>}
+          {tasting.tasting?.summary ? <p>{tasting.tasting.summary}</p> : <p className="text-neutral-600">(No summary yet.)</p>}
         </div>
       </section>
 
       <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <h2 className="text-xl font-semibold tracking-tight text-neutral-900">Notes</h2>
+        <h2 className="text-lg font-semibold tracking-tight text-neutral-900">Notes</h2>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
             <div className="text-sm font-semibold text-neutral-900">Nose</div>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-neutral-700">
-              {(tasting.tasting?.notes?.nose || []).map((x, i) => (
-                <li key={i}>{x}</li>
-              ))}
+              {(tasting.tasting?.notes?.nose || []).length ? (
+                (tasting.tasting?.notes?.nose || []).map((x, i) => <li key={i}>{x}</li>)
+              ) : (
+                <li className="text-neutral-500">(None)</li>
+              )}
             </ul>
           </div>
 
           <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
             <div className="text-sm font-semibold text-neutral-900">Palate</div>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-neutral-700">
-              {(tasting.tasting?.notes?.palate || []).map((x, i) => (
-                <li key={i}>{x}</li>
-              ))}
+              {(tasting.tasting?.notes?.palate || []).length ? (
+                (tasting.tasting?.notes?.palate || []).map((x, i) => <li key={i}>{x}</li>)
+              ) : (
+                <li className="text-neutral-500">(None)</li>
+              )}
             </ul>
           </div>
 
           <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
             <div className="text-sm font-semibold text-neutral-900">Finish</div>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-neutral-700">
-              {(tasting.tasting?.notes?.finish || []).map((x, i) => (
-                <li key={i}>{x}</li>
-              ))}
+              {(tasting.tasting?.notes?.finish || []).length ? (
+                (tasting.tasting?.notes?.finish || []).map((x, i) => <li key={i}>{x}</li>)
+              ) : (
+                <li className="text-neutral-500">(None)</li>
+              )}
             </ul>
           </div>
 
           <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
             <div className="text-sm font-semibold text-neutral-900">Overall</div>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-neutral-700">
-              {(tasting.tasting?.notes?.overall || []).map((x, i) => (
-                <li key={i}>{x}</li>
-              ))}
+              {(tasting.tasting?.notes?.overall || []).length ? (
+                (tasting.tasting?.notes?.overall || []).map((x, i) => <li key={i}>{x}</li>)
+              ) : (
+                <li className="text-neutral-500">(None)</li>
+              )}
             </ul>
           </div>
         </div>
       </section>
 
       <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <h2 className="text-xl font-semibold tracking-tight text-neutral-900">Consumer scoring</h2>
+        <h2 className="text-lg font-semibold tracking-tight text-neutral-900">Consumer scoring</h2>
 
         <div className="mt-3 text-sm text-neutral-700">
           {consumerScoring ? (
             <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
-              <div className="space-y-2">
+              <div className="grid gap-2 sm:grid-cols-3">
                 <div>
-                  <span className="font-semibold text-neutral-900">Overall:</span> {consumerScoring.overall_1_10}/10
+                  <div className="text-xs font-semibold text-neutral-600">Overall</div>
+                  <div className="mt-1 text-base font-semibold text-neutral-900">{consumerScoring.overall_1_10}/10</div>
                 </div>
                 <div>
-                  <span className="font-semibold text-neutral-900">Served:</span> {consumerScoring.served}
+                  <div className="text-xs font-semibold text-neutral-600">Served</div>
+                  <div className="mt-1 text-sm text-neutral-800">{consumerScoring.served}</div>
                 </div>
-                {consumerScoring.rebuy != null ? (
-                  <div>
-                    <span className="font-semibold text-neutral-900">Would buy again:</span>{" "}
-                    {consumerScoring.rebuy ? "Yes" : "No"}
+                <div>
+                  <div className="text-xs font-semibold text-neutral-600">Would buy again</div>
+                  <div className="mt-1 text-sm text-neutral-800">
+                    {consumerScoring.rebuy != null ? (consumerScoring.rebuy ? "Yes" : "No") : "—"}
                   </div>
-                ) : null}
+                </div>
               </div>
             </div>
           ) : (
-            <p>(No consumer scoring yet.)</p>
+            <p className="text-neutral-600">(No consumer scoring yet.)</p>
           )}
         </div>
       </section>
 
       <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <h2 className="text-xl font-semibold tracking-tight text-neutral-900">Source text</h2>
+        <h2 className="text-lg font-semibold tracking-tight text-neutral-900">Source text (cleaned)</h2>
 
         <div className="mt-3">
           {record?.tasting?.source?.original_text ? (
@@ -193,47 +222,35 @@ export default function TastingPage({ params }: { params: { slug: string } }) {
 {record.tasting.source.original_text}
             </pre>
           ) : (
-            <p className="text-sm text-neutral-700">
+            <p className="text-sm text-neutral-600">
               <em>No cleaned source text available.</em>
             </p>
           )}
         </div>
-      </section>
 
-      <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <h2 className="text-xl font-semibold tracking-tight text-neutral-900">Images</h2>
+        <h2 className="mt-6 text-lg font-semibold tracking-tight text-neutral-900">Images</h2>
 
         {assetsToShow && assetsToShow.length > 0 ? (
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            {assetsToShow.map((asset, i) => {
-              const ocr = asset?.path ? ocrPathForAsset(asset.path) : null;
-              const ocrText = ocr ? readPublicText(ocr) : null;
+          <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {assetsToShow.map((asset: any, i: number) => {
+              const ocrPath = asset?.path ? ocrPathForAsset(String(asset.path)) : null;
+              const ocrText = ocrPath ? readPublicText(ocrPath) : null;
 
               return (
-                <figure key={i} className="m-0">
-                  <img
-                    src={asset.path}
-                    alt={asset.note || asset.kind}
-                    className="w-full rounded-2xl border border-neutral-200 bg-white"
-                  />
-                  <figcaption className="mt-2 text-xs text-neutral-600">
-                    {asset.kind}
-                    {asset.note ? <span className="text-neutral-400"> · </span> : null}
-                    {asset.note ? <span>{asset.note}</span> : null}
+                <figure key={i} className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={asset.path} alt={asset.note || asset.kind || "image"} className="h-auto w-full" />
+                  <figcaption className="border-t border-neutral-200 p-3 text-xs text-neutral-600">
+                    <div className="font-semibold text-neutral-800">{asset.kind || "asset"}</div>
+                    {asset.note ? <div className="mt-1">{asset.note}</div> : null}
+                    {ocrText ? <div className="mt-2 whitespace-pre-wrap text-neutral-700">{ocrText}</div> : null}
                   </figcaption>
-
-                  {ocrText ? (
-                    <details className="mt-2 rounded-2xl border border-neutral-200 bg-neutral-50 p-3">
-                      <summary className="cursor-pointer text-sm font-semibold text-neutral-900">OCR text</summary>
-                      <pre className="mt-2 whitespace-pre-wrap text-xs text-neutral-800">{ocrText}</pre>
-                    </details>
-                  ) : null}
                 </figure>
               );
             })}
           </div>
         ) : (
-          <p className="mt-3 text-sm text-neutral-700">(No images added yet.)</p>
+          <p className="mt-3 text-sm text-neutral-600">(No images added yet.)</p>
         )}
       </section>
 
