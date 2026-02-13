@@ -29,8 +29,13 @@ export default async function BottlesIndexPage() {
   return (
     <main className="mx-auto max-w-5xl">
       <div className="flex items-baseline justify-between gap-4">
-        <h1 className="text-xl font-semibold tracking-tight">Bottles</h1>
-        <div className="text-sm text-neutral-600">{sorted.length} bottle(s)</div>
+        <div className="min-w-0">
+          <h1 className="text-xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
+          <p className="mt-1 text-sm text-neutral-700">
+            Standard blended Scotch whiskies commonly found in retail, shown with expert tastings.
+          </p>
+        </div>
+        <div className="shrink-0 text-sm text-neutral-600">{sorted.length} bottle(s)</div>
       </div>
 
       {sorted.length === 0 ? (
