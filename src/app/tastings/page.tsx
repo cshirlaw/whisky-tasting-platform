@@ -38,7 +38,7 @@ export default function TastingsPage() {
     <main style={{ maxWidth: 860, margin: "2rem auto", padding: "0 1rem" }}>
       <h1 style={{ marginBottom: "0.5rem" }}>Tastings</h1>
       <p style={{ color: "#555", marginTop: 0 }}>
-        Trial content. Archive first, structure second, interface last.
+        Expert tastings only at this stage. This section is for internal reference.
       </p>
 
       <ul style={{ listStyle: "none", padding: 0, marginTop: "1.25rem" }}>

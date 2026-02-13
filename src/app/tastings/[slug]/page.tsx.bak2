@@ -194,7 +194,7 @@ const status = (tasting as any)?.editorial?.status || "draft";
       </section>
 
       <hr />
-      <p style={{ color: "#666" }}>Expert tastings only at this stage. This page is for internal reference.</p>
+      <p style={{ color: "#666" }}>Built for archive and comparison. Trial content only at this stage.</p>
     </main>
   );
 }
