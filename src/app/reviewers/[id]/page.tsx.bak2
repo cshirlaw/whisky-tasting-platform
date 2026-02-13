@@ -6,9 +6,9 @@ import { loadExpertTastingsByContributorId } from "@/lib/expertTastings";
 export async function generateMetadata({ params }: { params: { id: string } }) {
   try {
     const r = await loadReviewer(params.id);
-    return { title: `${r.displayName} — Contributor` };
+    return { title: `${r.displayName} — Reviewer` };
   } catch {
-    return { title: "Contributor" };
+    return { title: "Reviewer" };
   }
 }
 
