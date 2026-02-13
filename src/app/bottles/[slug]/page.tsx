@@ -29,13 +29,7 @@ function tierOf(t: BottleTasting): "expert" | "consumer" | "other" {
 
 function findBottleImageSrc(slug: string): string | null {
   const dir = path.join(process.cwd(), "public", "bottles");
-  const candidates = [
-    `${slug}.jpg`,
-    `${slug}.jpeg`,
-    `${slug}.png`,
-    `${slug}.webp`,
-    `${slug}.avif`,
-  ];
+  const candidates = [`${slug}.jpg`, `${slug}.jpeg`, `${slug}.png`, `${slug}.webp`, `${slug}.avif`];
 
   for (const f of candidates) {
     const full = path.join(dir, f);
@@ -101,18 +95,18 @@ export default async function BottleDetailPage({
   const imgSrc = findBottleImageSrc(bottle.slug);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
-      <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
-        <div className="grid gap-5 md:grid-cols-[200px_1fr] md:items-start">
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+        <div className="grid gap-6 md:grid-cols-[240px_1fr] md:items-start">
           <div className="w-full">
             {imgSrc ? (
-              <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+              <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 shadow-[0_1px_0_rgba(0,0,0,0.02)]">
                 <Image
                   src={imgSrc}
                   alt={bottle.name}
                   width={800}
                   height={1000}
-                  className="h-auto w-full"
+                  className="h-auto w-full object-contain"
                   priority
                 />
               </div>
@@ -123,9 +117,9 @@ export default async function BottleDetailPage({
             )}
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-4">
             <div>
-              <h1 className="text-3xl font-semibold tracking-tight">{bottle.name}</h1>
+              <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">{bottle.name}</h1>
               <div className="mt-1 text-sm text-neutral-600">
                 {bottle.category ? <span>{bottle.category} · </span> : null}
                 {tastings.length} tasting(s)
@@ -140,7 +134,7 @@ export default async function BottleDetailPage({
                     <div className="text-lg font-semibold text-neutral-900">{expertStars.stars}</div>
                     <div className="text-sm font-semibold text-neutral-900">{expertAvg10!.toFixed(1)}/10</div>
                   </div>
-                  <div className="mt-1 text-xs text-neutral-600">{expertRated10.length} expert review(s)</div>
+                  <div className="mt-1 text-xs text-neutral-600">{expertRated10.length} expert tasting(s)</div>
                 </div>
               ) : null}
 
@@ -151,26 +145,26 @@ export default async function BottleDetailPage({
                     <div className="text-base font-semibold text-neutral-800">{consumerStars.stars}</div>
                     <div className="text-sm font-semibold text-neutral-800">{consumerAvg10!.toFixed(1)}/10</div>
                   </div>
-                  <div className="mt-1 text-xs text-neutral-600">{consumerRated10.length} consumer review(s)</div>
+                  <div className="mt-1 text-xs text-neutral-600">{consumerRated10.length} consumer tasting(s)</div>
                 </div>
               ) : null}
             </div>
 
-            <div className="mt-1 text-xs text-neutral-600">
+            <div className="text-xs text-neutral-600">
               Stars are whole-star equivalents derived from overall_1_10 where present.
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+      <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
         <div className="text-sm font-semibold">Ratings</div>
         <div className="mt-3">
           <StarFilter baseHref={"/bottles/" + bottle.slug} activeStars={stars} counts={dist} />
         </div>
         {stars ? (
           <div className="mt-3 text-xs text-neutral-600">
-            Showing only {stars}★ reviews (derived from overall_1_10 where present).
+            Showing only {stars}★ tastings (derived from overall_1_10 where present).
           </div>
         ) : (
           <div className="mt-3 text-xs text-neutral-600">
@@ -180,17 +174,20 @@ export default async function BottleDetailPage({
       </section>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold tracking-tight">Reviews</h2>
+        <h2 className="text-xl font-semibold tracking-tight">Tastings</h2>
 
         {visibleSorted.length === 0 ? (
-          <p className="mt-6 text-neutral-700">No reviews match that filter yet.</p>
+          <p className="mt-6 text-neutral-700">No tastings match that filter yet.</p>
         ) : (
           <ul className="mt-6 space-y-3">
             {visibleSorted.map((t) => (
               <li key={t.fileRelPath} className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <div className="text-base font-semibold">
-                    <Link className="underline underline-offset-4" href={"/tastings/" + t.tastingSlug}>
+                  <div className="text-base font-semibold text-neutral-900">
+                    <Link
+                      className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900"
+                      href={"/tastings/" + t.tastingSlug}
+                    >
                       {t.tastingSlug}
                     </Link>
                   </div>
@@ -198,7 +195,10 @@ export default async function BottleDetailPage({
                     {t.overall1to10 !== null ? <span>{t.overall1to10}/10 · </span> : null}
                     {t.contributorTier ? <span>{t.contributorTier} · </span> : null}
                     {t.contributorId ? (
-                      <Link className="underline underline-offset-4" href={"/reviewers/" + t.contributorId}>
+                      <Link
+                        className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900"
+                        href={"/reviewers/" + t.contributorId}
+                      >
                         {t.contributorName || t.contributorId}
                       </Link>
                     ) : (
@@ -217,7 +217,7 @@ export default async function BottleDetailPage({
       </section>
 
       <div className="mt-10 text-sm">
-        <Link className="underline underline-offset-4" href="/bottles">
+        <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/bottles">
           Back to Bottles
         </Link>
       </div>
