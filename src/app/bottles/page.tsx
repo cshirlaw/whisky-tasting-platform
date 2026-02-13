@@ -1,9 +1,23 @@
 import BottleCard from "@/components/BottleCard";
 import { loadBottleSummaries } from "@/lib/bottles";
+import fs from "node:fs";
+import path from "node:path";
 
 export const metadata = {
   title: "Bottles",
 };
+
+const IMAGE_EXTS = ["jpg", "jpeg", "png", "webp", "avif"] as const;
+
+function pickBottleImage(slug: string): string | null {
+  const baseDir = path.join(process.cwd(), "public", "bottles");
+  for (const ext of IMAGE_EXTS) {
+    const file = `${slug}.${ext}`;
+    const full = path.join(baseDir, file);
+    if (fs.existsSync(full)) return `/bottles/${file}`;
+  }
+  return null;
+}
 
 export default async function BottlesIndexPage() {
   const items = await loadBottleSummaries();
@@ -24,10 +38,9 @@ export default async function BottlesIndexPage() {
       ) : (
         <div className="mt-6 grid gap-3">
           {sorted.map((b) => {
-            const metaParts = [
-              b.bottle.category || null,
-              b.bottle.abvPercent ? `${b.bottle.abvPercent}%` : null,
-            ].filter(Boolean) as string[];
+            const metaParts = [b.bottle.category || null, b.bottle.abvPercent ? `${b.bottle.abvPercent}%` : null].filter(
+              Boolean,
+            ) as string[];
 
             return (
               <BottleCard
@@ -37,6 +50,7 @@ export default async function BottlesIndexPage() {
                 meta={metaParts.join(" · ")}
                 rightTop={b.avgOverall1to10 !== null ? `${b.avgOverall1to10.toFixed(1)}/10` : "—"}
                 rightBottom={`${b.tastingCount} review(s)`}
+                imageSrc={pickBottleImage(b.bottle.slug)}
               />
             );
           })}
