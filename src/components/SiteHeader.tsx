@@ -3,10 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+function titleCaseFromSlug(seg: string) {
+  return seg
+    .split("-")
+    .filter(Boolean)
+    .map((w) => w.slice(0, 1).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
 function crumbLabel(seg: string) {
   if (!seg) return "Home";
   if (seg === "bottles") return "Bottles";
-  return seg.replace(/-/g, " ");
+  if (seg === "tastings") return "Tastings";
+  if (seg === "reviewers") return "Reviewers";
+  return titleCaseFromSlug(seg);
 }
 
 export default function SiteHeader() {
