@@ -35,42 +35,58 @@ export default function TastingsPage() {
   });
 
   return (
-    <main style={{ maxWidth: 860, margin: "2rem auto", padding: "0 1rem" }}>
-      <h1 style={{ marginBottom: "0.5rem" }}>Tastings</h1>
-      <p style={{ color: "#555", marginTop: 0 }}>
-        Expert tastings only at this stage. This section is for internal reference.
-      </p>
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Tastings</h1>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+          Expert tastings only at this stage. This section is for internal reference.
+        </p>
+      </section>
 
-      <ul style={{ listStyle: "none", padding: 0, marginTop: "1.25rem" }}>
-        {items.map(({ slug, tasting }) => {
-          const href = `/tastings/${encodeURIComponent(slug)}`;
-          const tier = tasting.contributor?.tier || "other";
-          const platform = tasting.contributor?.source_platform || null;
-          const status = (tasting as any)?.editorial?.status || "draft";
+      <section className="mt-6">
+        <ul className="space-y-3">
+          {items.map(({ slug, tasting }) => {
+            const href = `/tastings/${encodeURIComponent(slug)}`;
+            const tier = tasting.contributor?.tier || "other";
+            const platform = tasting.contributor?.source_platform || null;
+            const status = (tasting as any)?.editorial?.status || "draft";
 
-          return (
-            <li key={slug} style={{ padding: "0.9rem 0", borderBottom: "1px solid #eee" }}>
-              <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", alignItems: "baseline" }}>
-                <Link href={href} style={{ fontSize: "1.05rem", textDecoration: "none" }}>
-                  {tasting.whisky?.name_display || slug}
-                </Link>
+            return (
+              <li key={slug} className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <div className="text-base font-semibold text-neutral-900">
+                    <Link
+                      href={href}
+                      className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900"
+                    >
+                      {tasting.whisky?.name_display || slug}
+                    </Link>
+                  </div>
 
-                <span style={{ padding: "0.12rem 0.5rem", border: "1px solid #ccc", borderRadius: 999, fontSize: "0.78rem" }}>
-                  {tierLabel(tier, platform)}
-                </span>
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
+                    <span className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-neutral-900 shadow-sm">
+                      {tierLabel(tier, platform)}
+                    </span>
+                    <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-neutral-700 shadow-sm">
+                      {editorialLabel(status)}
+                    </span>
+                  </div>
+                </div>
 
-                <span style={{ padding: "0.12rem 0.5rem", border: "1px solid #ddd", borderRadius: 999, fontSize: "0.78rem", color: "#444" }}>
-                  {editorialLabel(status)}
-                </span>
-              </div>
+                <div className="mt-2 text-sm text-neutral-600">
+                  {tasting.contributor?.name || "Unknown contributor"}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
 
-              <div style={{ color: "#666", fontSize: "0.92rem", marginTop: "0.35rem" }}>
-                {tasting.contributor?.name || "Unknown contributor"}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="mt-10 text-sm">
+        <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/">
+          Back to Home
+        </Link>
+      </div>
     </main>
   );
 }
