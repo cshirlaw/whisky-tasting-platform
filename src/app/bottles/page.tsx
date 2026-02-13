@@ -27,16 +27,16 @@ export default async function BottlesIndexPage() {
   );
 
   return (
-    <main>
+    <main className="mx-auto max-w-5xl">
       <div className="flex items-baseline justify-between gap-4">
-        <h1 className="text-xl font-semibold">Bottles</h1>
+        <h1 className="text-xl font-semibold tracking-tight">Bottles</h1>
         <div className="text-sm text-neutral-600">{sorted.length} bottle(s)</div>
       </div>
 
       {sorted.length === 0 ? (
         <p className="mt-6 text-neutral-700">No bottles found yet.</p>
       ) : (
-        <div className="mt-6 grid gap-3">
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {sorted.map((b) => {
             const metaParts = [b.bottle.category || null, b.bottle.abvPercent ? `${b.bottle.abvPercent}%` : null].filter(
               Boolean,
