@@ -27,14 +27,14 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto max-w-4xl px-4">
+      <div className="mx-auto max-w-5xl px-4">
         <div className="flex items-center justify-between py-4">
           <div className="flex flex-col">
-            <Link href="/" className="text-base font-semibold tracking-tight">
-              Whisky Tasting Platform
+            <Link href="/" className="text-base font-semibold tracking-tight text-neutral-900">
+              Blended Scotch Whisky
             </Link>
             <div className="mt-1 text-xs text-neutral-600">
-              Built for archive and comparison. Trial content only at this stage.
+              A quiet reference for retail blends, starting with expert tastings.
             </div>
           </div>
 
@@ -47,8 +47,8 @@ export default function SiteHeader() {
                   href={n.href}
                   className={
                     active
-                      ? "rounded-full bg-neutral-900 px-3 py-1 text-white"
-                      : "rounded-full border border-neutral-200 bg-white px-3 py-1 text-neutral-900 hover:bg-neutral-50"
+                      ? "rounded-full bg-neutral-900 px-3 py-1 text-white shadow-sm"
+                      : "rounded-full border border-neutral-200 bg-white px-3 py-1 text-neutral-900 shadow-sm transition hover:border-neutral-300 hover:bg-neutral-50"
                   }
                 >
                   {n.label}
@@ -62,7 +62,10 @@ export default function SiteHeader() {
           <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-600">
             {crumbs.map((c, i) => (
               <span key={c.href} className="flex items-center gap-2">
-                <Link href={c.href} className="hover:underline hover:underline-offset-4">
+                <Link
+                  href={c.href}
+                  className="hover:underline hover:underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900"
+                >
                   {c.label}
                 </Link>
                 {i < crumbs.length - 1 ? <span className="text-neutral-300">/</span> : null}
