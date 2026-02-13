@@ -17,17 +17,17 @@ export default function BottleCard({
   imageSrc?: string | null;
 }) {
   return (
-    <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition hover:shadow-md sm:p-5">
+    <div className="group rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition hover:-translate-y-[1px] hover:border-neutral-300 hover:shadow-md focus-within:ring-2 focus-within:ring-neutral-900/10 sm:p-5">
       <div className="flex items-start gap-4">
         {imageSrc ? (
           <div className="shrink-0">
-            <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white">
+            <div className="overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-[0_1px_0_rgba(0,0,0,0.02)] transition group-hover:border-neutral-300">
               <Image
                 src={imageSrc}
                 alt={title}
                 width={72}
                 height={90}
-                className="h-auto w-[72px]"
+                className="h-auto w-[72px] object-contain"
                 priority={false}
               />
             </div>
@@ -37,11 +37,14 @@ export default function BottleCard({
         <div className="flex min-w-0 flex-1 items-start justify-between gap-4">
           <div className="min-w-0">
             <h2 className="text-base font-semibold leading-snug text-neutral-900">
-              <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href={href}>
+              <Link
+                className="outline-none underline underline-offset-4 decoration-neutral-300 transition hover:decoration-neutral-900 focus-visible:decoration-neutral-900"
+                href={href}
+              >
                 {title}
               </Link>
             </h2>
-            {meta ? <p className="mt-1 text-sm text-neutral-600">{meta}</p> : null}
+            {meta ? <p className="mt-1 text-sm leading-snug text-neutral-600">{meta}</p> : null}
           </div>
 
           {rightTop || rightBottom ? (
