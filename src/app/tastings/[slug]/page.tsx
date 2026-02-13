@@ -92,7 +92,7 @@ const status = (tasting as any)?.editorial?.status || "draft";
 
         return (
           <section style={{ marginBottom: "1.25rem" }}>
-            <h2 style={{ marginBottom: "0.5rem" }}>More by this reviewer</h2>
+            <h2 style={{ marginBottom: "0.5rem" }}>More by this contributor</h2>
             <ul>
               {other.slice(0, 8).map((t: any) => (
                 <li key={t.slug}>

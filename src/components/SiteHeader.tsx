@@ -15,7 +15,7 @@ function crumbLabel(seg: string) {
   if (!seg) return "Home";
   if (seg === "bottles") return "Bottles";
   if (seg === "tastings") return "Tastings";
-  if (seg === "reviewers") return "Reviewers";
+  if (seg === "reviewers") return "Contributors";
   return titleCaseFromSlug(seg);
 }
 
