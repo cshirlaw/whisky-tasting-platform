@@ -137,6 +137,14 @@ function normalizePayload(x: any): { ok: true; v: Normalized } | { ok: false; ms
   };
 }
 
+function inferAgeYearsFromBottle(bottleKey: string, nameDisplay: string): number | null {
+  const m1 = String(bottleKey || "").match(/-(\d{1,3})yo$/i);
+  if (m1) return parseInt(m1[1], 10);
+  const nm = String(nameDisplay || "");
+  const m2 = nm.match(/\b(\d{1,3})\s*Year\s*Old\b/i) || nm.match(/\b(\d{1,3})\s*(?:yo|y\/o)\b/i);
+  return m2 ? parseInt(m2[1], 10) : null;
+}
+
 function makeFilename(bottleKey: string, tastedDate: string, seq: number) {
   const safeDate = tastedDate.replace(/[^0-9-]/g, "").slice(0, 10) || isoDateOnly(new Date());
   const n = String(seq).padStart(3, "0");
@@ -212,8 +220,8 @@ export async function POST(req: Request) {
   const seq = await nextSequence(outDir, v.bottleKey, v.tastedDate);
   const filename = makeFilename(v.bottleKey, v.tastedDate, seq);
   const fullPath = path.join(outDir, filename);
-
-  const tasting = {
+  const ageYears = inferAgeYearsFromBottle(v.bottleKey, (v.bottleNameDisplay || v.bottleKey));
+const tasting = {
     id: `${v.reviewerId}:${filename.replace(/\.json$/i, "")}`,
     type: "tasting",
     version: "1.0",
@@ -232,7 +240,7 @@ export async function POST(req: Request) {
       distillery: null,
       brand_or_label: null,
       series: null,
-      age_years: inferAgeYears(),
+      age_years: ageYears,
       abv_percent: null,
       cask_type: null,
       cask_number: null,
