@@ -1,0 +1,71 @@
+{
+  "$id": "reviewer-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewer record (locked v1.0)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "type", "version", "tier", "display_name", "status", "privacy", "contact", "notes"],
+  "properties": {
+    "id": { "type": "string", "minLength": 3 },
+    "type": { "const": "reviewer" },
+    "version": { "const": "1.0" },
+    "tier": { "type": "string", "enum": ["expert", "consumer", "private-contributor"] },
+
+    "display_name": { "type": "string", "minLength": 1 },
+    "sort_name": { "type": ["string", "null"], "minLength": 1 },
+
+    "status": { "type": "string", "enum": ["active", "inactive"] },
+
+    "panel": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["id", "name", "wave"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "name": { "type": "string", "minLength": 1 },
+        "wave": { "type": "string", "minLength": 1 }
+      }
+    },
+
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["public_profile", "publish_name"],
+      "properties": {
+        "public_profile": { "type": "boolean" },
+        "publish_name": { "type": "boolean" }
+      }
+    },
+
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["email"],
+      "properties": {
+        "email": { "type": ["string", "null"], "format": "email" }
+      }
+    },
+
+    "bio": { "type": ["string", "null"] },
+    "credentials": { "type": ["array", "null"], "items": { "type": "string", "minLength": 1 } },
+
+    "source": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["platform", "url"],
+      "properties": {
+        "platform": { "type": ["string", "null"] },
+        "url": { "type": ["string", "null"] }
+      }
+    },
+
+    "notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["internal"],
+      "properties": {
+        "internal": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

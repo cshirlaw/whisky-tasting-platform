@@ -1,0 +1,46 @@
+{
+  "$id": "review-consumer-locked.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Consumer review (locked v1.0)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "version",
+    "tier",
+    "reviewer_id",
+    "bottle_key",
+    "tasted_date",
+    "served",
+    "overall_1_10",
+    "rebuy"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 3 },
+    "type": { "const": "review" },
+    "version": { "const": "1.0" },
+    "tier": { "const": "consumer" },
+
+    "reviewer_id": { "type": "string", "minLength": 3 },
+    "bottle_key": { "type": "string", "minLength": 2 },
+
+    "tasted_date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "served": { "type": "string", "enum": ["Neat", "Water", "Highball", "Cocktail", "Other"] },
+
+    "overall_1_10": { "type": "integer", "minimum": 1, "maximum": 10 },
+    "rebuy": { "type": ["boolean", "null"] },
+
+    "note": { "type": ["string", "null"], "maxLength": 600 },
+
+    "permission": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["status", "note"],
+      "properties": {
+        "status": { "type": "string", "enum": ["approved", "pending", "blocked"] },
+        "note": { "type": ["string", "null"], "maxLength": 300 }
+      }
+    }
+  }
+}

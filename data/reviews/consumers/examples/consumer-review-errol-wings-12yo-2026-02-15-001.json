@@ -1,0 +1,17 @@
+{
+  "id": "consumer:reviewer-consumer-anon-0001:errol-wings-12yo:2026-02-15:001",
+  "type": "review",
+  "version": "1.0",
+  "tier": "consumer",
+  "reviewer_id": "reviewer-consumer-anon-0001",
+  "bottle_key": "errol-wings-12yo",
+  "tasted_date": "2026-02-15",
+  "served": "Neat",
+  "overall_1_10": 7,
+  "rebuy": true,
+  "note": null,
+  "permission": {
+    "status": "approved",
+    "note": "Test entry for consumer scoring system."
+  }
+}

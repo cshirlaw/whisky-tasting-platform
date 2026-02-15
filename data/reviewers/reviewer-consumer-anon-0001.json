@@ -1,0 +1,27 @@
+{
+  "id": "reviewer-consumer-anon-0001",
+  "type": "reviewer",
+  "version": "1.0",
+  "tier": "consumer",
+  "display_name": "Anonymous",
+  "sort_name": null,
+  "status": "active",
+  "panel": {
+    "id": "panel-edinburgh-001",
+    "name": "Edinburgh Panel",
+    "wave": "2026-Q1"
+  },
+  "privacy": {
+    "public_profile": false,
+    "publish_name": false
+  },
+  "contact": {
+    "email": null
+  },
+  "bio": null,
+  "credentials": null,
+  "source": null,
+  "notes": {
+    "internal": "Test panel participant. Keep anonymous on public pages."
+  }
+}
