@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { tastings } from "@/lib/tastings";
+import { listAllTastings } from "@/lib/tastings";
 
 export async function GET() {
-  return NextResponse.json(tastings, { status: 200 });
+  const data = listAllTastings().map(({ slug, tasting }) => ({ slug, tasting }));
+  return NextResponse.json(data, { status: 200 });
 }

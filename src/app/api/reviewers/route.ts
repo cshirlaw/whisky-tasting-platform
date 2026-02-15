@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { reviewers } from "@/lib/reviewers";
+import { loadAllReviewers } from "@/lib/reviewers";
 
 export async function GET() {
-  return NextResponse.json(reviewers, { status: 200 });
+  const data = await loadAllReviewers();
+  return NextResponse.json(data, { status: 200 });
 }

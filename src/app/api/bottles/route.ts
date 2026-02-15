@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { bottles } from "@/lib/bottles";
+import { loadBottleSummaries } from "@/lib/bottles";
 
 export async function GET() {
-  return NextResponse.json(bottles, { status: 200 });
+  const data = await loadBottleSummaries();
+  return NextResponse.json(data, { status: 200 });
 }
