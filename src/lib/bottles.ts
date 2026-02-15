@@ -162,7 +162,7 @@ export async function loadAllBottleTastings(): Promise<BottleTasting[]> {
     const contributorName = safeString(contributor?.name);
     const contributorTier = safeString(contributor?.tier);
 
-    const overall1to10 = safeNumber(j?.tasting?.score?.overall_1_10);
+    const overall1to10 = safeNumber(j?.consumer_scoring?.overall_1_10) ?? safeNumber(j?.tasting?.score?.overall_1_10);
     const overallStars1to5 = overall1to10 ? starsFrom1to10(overall1to10) : null;
 
     const fileRelPath = path.relative(process.cwd(), full);
