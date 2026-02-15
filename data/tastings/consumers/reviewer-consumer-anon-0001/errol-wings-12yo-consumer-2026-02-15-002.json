@@ -1,0 +1,58 @@
+{
+  "id": "reviewer-consumer-anon-0001:errol-wings-12yo-consumer-2026-02-15-002",
+  "type": "tasting",
+  "version": "1.0",
+  "contributor": {
+    "id": "reviewer-consumer-anon-0001",
+    "name": "reviewer-consumer-anon-0001",
+    "tier": "consumer",
+    "source_platform": null
+  },
+  "dates": {
+    "post_date": null,
+    "tasted_date": "2026-02-15",
+    "note": null
+  },
+  "whisky": {
+    "name_display": "Errol Wings 12 Year Old",
+    "category": "Blended Scotch Whisky",
+    "style": "Blended Scotch Whisky",
+    "region": null,
+    "distillery": null,
+    "brand_or_label": null,
+    "series": null,
+    "age_years": 12,
+    "abv_percent": null,
+    "cask_type": null,
+    "cask_number": null,
+    "bottle_count": null,
+    "bottling_notes_label": null
+  },
+  "tasting": {
+    "summary": "Admin test entry.",
+    "notes": {
+      "nose": [],
+      "palate": [],
+      "finish": [],
+      "overall": []
+    },
+    "score": null,
+    "comparisons": []
+  },
+  "consumer_scoring": {
+    "overall_1_10": 8,
+    "served": "Neat",
+    "would_buy_again": true
+  },
+  "source": {
+    "platform": null,
+    "post_url": null,
+    "original_text": null,
+    "assets": [],
+    "permission": {
+      "status": "unknown",
+      "note": null
+    }
+  },
+  "tags": null
+}

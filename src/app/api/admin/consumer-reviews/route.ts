@@ -232,7 +232,7 @@ export async function POST(req: Request) {
       distillery: null,
       brand_or_label: null,
       series: null,
-      age_years: null,
+      age_years: inferAgeYears(),
       abv_percent: null,
       cask_type: null,
       cask_number: null,
