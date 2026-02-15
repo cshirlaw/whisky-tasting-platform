@@ -12,6 +12,10 @@
     {
       "id": "private-contributor",
       "order": 3
+    },
+    {
+      "id": "reviewer-consumer-anon-0001",
+      "order": 4
     }
   ]
 }
