@@ -19,6 +19,13 @@ function pickBottleImage(bottleKey: string, slug: string): string | null {
   }
 
   const baseDir = path.join(process.cwd(), "public", "bottles");
+
+  for (const ext of IMAGE_EXTS) {
+    const file = `${bottleKey}.${ext}`;
+    const full = path.join(baseDir, file);
+    if (fs.existsSync(full)) return `/bottles/${file}`;
+  }
+
   for (const ext of IMAGE_EXTS) {
     const file = `${slug}.${ext}`;
     const full = path.join(baseDir, file);
