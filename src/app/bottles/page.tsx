@@ -52,16 +52,18 @@ export default async function BottlesIndexPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <div className="min-w-0">
-            <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-              Standard blended Scotch whiskies commonly found in retail, shown with expert tastings.
-            </p>
+          <div className="mx-auto max-w-3xl">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <div className="min-w-0">
+                <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+                  Standard blended Scotch whiskies commonly found in retail, shown with expert tastings.
+                </p>
+              </div>
+              <div className="shrink-0 text-sm text-neutral-600">{items.length} bottle(s)</div>
+            </div>
           </div>
-          <div className="shrink-0 text-sm text-neutral-600">{items.length} bottle(s)</div>
-        </div>
-      </section>
+        </section>
 
       {items.length === 0 ? (
         <p className="mt-6 text-neutral-700">No bottles found yet.</p>

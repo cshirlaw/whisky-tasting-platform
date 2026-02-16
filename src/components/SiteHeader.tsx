@@ -43,8 +43,8 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/90 backdrop-blur">
       <div className="mx-auto max-w-5xl px-4">
-        <div className="flex items-center justify-between py-4">
-          <div className="flex flex-col">
+        <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
             <Link href="/" className="text-base font-semibold tracking-tight text-neutral-900">
               Blended Scotch Whisky
             </Link>
@@ -53,7 +53,7 @@ export default function SiteHeader() {
             </div>
           </div>
 
-          <nav className="flex items-center gap-3 text-sm">
+          <nav className="flex flex-wrap items-center justify-center gap-3 text-sm sm:justify-end">
             {nav.map((n) => {
               const active = pathname === n.href || (n.href !== "/" && pathname.startsWith(n.href + "/")) || pathname === n.href;
               return (

@@ -37,10 +37,12 @@ export default function TastingsPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Tastings</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+        <div className="mx-auto max-w-3xl">
+                    <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Tastings</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
           Tastings only at this stage. This section is for internal reference.
         </p>
+        </div>
       </section>
 
       <section className="mt-6">
