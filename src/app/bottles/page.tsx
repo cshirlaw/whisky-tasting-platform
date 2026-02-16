@@ -38,8 +38,21 @@ function pickBottleImage(bottleKey: string, slug: string): string | null {
 export default async function BottlesIndexPage() {
   const items = await loadBottleSummaries();
 
-  const retail = items.filter((x) => (x?.bottle?.category || "") === "Blended Scotch Whisky");
-  const otherWithTastings = items.filter((x) => (x?.bottle?.category || "") !== "Blended Scotch Whisky" && x.tastingCount > 0);
+  function normCategory(v: any) {
+    return String(v || "").trim().toLowerCase();
+  }
+
+  function isBlendCategory(v: any) {
+    const c = normCategory(v);
+    return (
+      c === "blended scotch whisky" ||
+      c === "blended malt scotch" ||
+      c === "blended malt scotch whisky"
+    );
+  }
+
+  const retail = items.filter((x) => isBlendCategory(x?.bottle?.category));
+  const otherWithTastings = items.filter((x) => !isBlendCategory(x?.bottle?.category) && x.tastingCount > 0);
 
   const sortedRetail = [...retail].sort((a, b) =>
     String(a.bottle.name || "").localeCompare(String(b.bottle.name || ""), "en", { sensitivity: "base" }),
