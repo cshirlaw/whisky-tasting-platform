@@ -28,15 +28,25 @@ function tierOf(t: BottleTasting): "expert" | "consumer" | "other" {
 }
 
 function findBottleImageSrc(slug: string): string | null {
-  const dir = path.join(process.cwd(), "public", "bottles");
-  const candidates = [`${slug}.jpg`, `${slug}.jpeg`, `${slug}.png`, `${slug}.webp`, `${slug}.avif`];
+  const exts = ["jpg", "jpeg", "png", "webp", "avif"];
 
-  for (const f of candidates) {
-    const full = path.join(dir, f);
+  const thumbsDir = path.join(process.cwd(), "public", "bottles", "thumbs");
+  for (const ext of exts) {
+    const f = `${slug}.${ext}`;
+    const full = path.join(thumbsDir, f);
+    if (fs.existsSync(full)) return `/bottles/thumbs/${f}`;
+  }
+
+  const baseDir = path.join(process.cwd(), "public", "bottles");
+  for (const ext of exts) {
+    const f = `${slug}.${ext}`;
+    const full = path.join(baseDir, f);
     if (fs.existsSync(full)) return `/bottles/${f}`;
   }
+
   return null;
 }
+
 
 export default async function BottleDetailPage({
   params,
