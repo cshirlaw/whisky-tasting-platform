@@ -35,6 +35,7 @@ export default function SiteHeader() {
   const nav = [
     { href: "/", label: "Home" },
     { href: "/bottles", label: "Bottles" },
+    { href: "/tastings", label: "Tastings" },
     { href: "/admin/consumer-review", label: "Admin" }
   ];
 
