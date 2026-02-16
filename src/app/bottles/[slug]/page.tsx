@@ -27,25 +27,42 @@ function tierOf(t: BottleTasting): "expert" | "consumer" | "other" {
   return "other";
 }
 
-function findBottleImageSrc(slug: string): string | null {
+function findBottleImageSrc(slug: string, bottleKey?: string | null): string | null {
+  const thumbsDir = path.join(process.cwd(), "public", "bottles", "thumbs");
+  const baseDir = path.join(process.cwd(), "public", "bottles");
   const exts = ["jpg", "jpeg", "png", "webp", "avif"];
 
-  const thumbsDir = path.join(process.cwd(), "public", "bottles", "thumbs");
-  for (const ext of exts) {
-    const f = `${slug}.${ext}`;
-    const full = path.join(thumbsDir, f);
-    if (fs.existsSync(full)) return `/bottles/thumbs/${f}`;
-  }
+  const variants = new Set<string>();
+  const add = (v?: string | null) => {
+    if (!v) return;
+    const x = String(v).trim();
+    if (x) variants.add(x);
+  };
 
-  const baseDir = path.join(process.cwd(), "public", "bottles");
-  for (const ext of exts) {
-    const f = `${slug}.${ext}`;
-    const full = path.join(baseDir, f);
-    if (fs.existsSync(full)) return `/bottles/${f}`;
+  add(slug);
+  add(bottleKey);
+
+  // Common mismatch: "-10-year-old" (slug) vs "-10yo" (filename)
+  add(slug.replace(/-(\d+)-year-old\b/g, "-$1yo"));
+  add(slug.replace(/-year-old\b/g, "-yo"));
+
+  const keys = Array.from(variants);
+
+  for (const key of keys) {
+    for (const ext of exts) {
+      const f = `${key}.${ext}`;
+
+      const fullThumb = path.join(thumbsDir, f);
+      if (fs.existsSync(fullThumb)) return `/bottles/thumbs/${f}`;
+
+      const fullBase = path.join(baseDir, f);
+      if (fs.existsSync(fullBase)) return `/bottles/${f}`;
+    }
   }
 
   return null;
 }
+
 
 
 export default async function BottleDetailPage({
@@ -102,9 +119,9 @@ export default async function BottleDetailPage({
   const expertStars = expertAvg10 === null ? null : starsTextFrom10(expertAvg10);
   const consumerStars = consumerAvg10 === null ? null : starsTextFrom10(consumerAvg10);
 
-  const imgSrc = findBottleImageSrc(bottle.slug);
-
-  return (
+  const bottleKey = (bottle as any)?.bottleKey ?? (bottle as any)?.bottle_key ?? (bottle as any)?.key ?? null;
+  const imgSrc = findBottleImageSrc(bottle.slug, bottleKey);
+return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
         <div className="grid gap-6 md:grid-cols-[240px_1fr] md:items-start">
