@@ -36,6 +36,7 @@ export default function SiteHeader() {
     { href: "/", label: "Home" },
     { href: "/bottles", label: "Bottles" },
     { href: "/tastings", label: "Tastings" },
+    { href: "/reviewers", label: "Contributors" },
     { href: "/admin/consumer-review", label: "Admin" }
   ];
 
