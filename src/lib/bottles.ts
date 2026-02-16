@@ -143,6 +143,39 @@ function preferredBottleSlug(tastings: BottleTasting[]): string {
   return tastings[0]?.bottleSlug || tastings[0]?.bottleKey || "unknown-bottle";
 }
 
+
+type CatalogueBottle = {
+  key: string;
+  slug: string;
+  name: string;
+  category?: string;
+  ageYears?: number | null;
+  abvPercent?: number | null;
+  brandOrLabel?: string;
+};
+
+async function loadCatalogueBottles(): Promise<CatalogueBottle[]> {
+  try {
+    const full = repoRootPath("data", "bottles", "catalogue.json");
+    const raw = await fs.readFile(full, "utf-8");
+    const j = JSON.parse(raw);
+    const items = Array.isArray(j?.bottles) ? j.bottles : [];
+    return items
+      .map((x: any) => ({
+        key: safeString(x?.key) || "",
+        slug: safeString(x?.slug) || "",
+        name: safeString(x?.name) || "",
+        category: safeString(x?.category),
+        ageYears: safeNumber(x?.ageYears),
+        abvPercent: safeNumber(x?.abvPercent),
+        brandOrLabel: safeString(x?.brandOrLabel),
+      }))
+      .filter((x: any) => x.key && x.slug && x.name);
+  } catch {
+    return [];
+  }
+}
+
 export async function loadAllBottleTastings(): Promise<BottleTasting[]> {
   const baseDir = repoRootPath("data", "tastings");
   const CONSUMER_TEMPLATES_DIR = repoRootPath("data", "tastings", "consumers", "templates");
@@ -197,18 +230,28 @@ export type BottleSummary = {
 };
 
 export async function loadBottleSummaries(): Promise<BottleSummary[]> {
+  const catalogue = await loadCatalogueBottles();
   const all = await loadAllBottleTastings();
+
   const byKey = new Map<string, BottleTasting[]>();
 
+  // Seed from catalogue so bottles can exist with zero tastings
+  for (const b of catalogue) {
+    if (!byKey.has(b.key)) byKey.set(b.key, []);
+  }
+
+  // Add tastings-derived bottles
   for (const t of all) {
     const arr = byKey.get(t.bottleKey) || [];
     arr.push(t);
     byKey.set(t.bottleKey, arr);
   }
 
+  const catByKey = new Map(catalogue.map((b) => [b.key, b] as const));
+
   const out: BottleSummary[] = [];
   for (const [key, arr] of byKey.entries()) {
-    const first = arr[0];
+    const cat = catByKey.get(key);
 
     const rated = arr.filter((x) => typeof x.overall1to10 === "number" && x.overall1to10 !== null);
     const ratedCount = rated.length;
@@ -222,13 +265,16 @@ export async function loadBottleSummaries(): Promise<BottleSummary[]> {
       if (s && distStars1to5[s] !== undefined) distStars1to5[s] += 1;
     }
 
-    const slug = preferredBottleSlug(arr);
+    const slug = arr.length ? preferredBottleSlug(arr) : (cat?.slug || "unknown-bottle");
 
     const bottle: BottleKey = {
       key,
       slug,
-      name: first?.bottleName || slug,
-      category: first?.category,
+      name: (arr[0]?.bottleName || cat?.name || slug) as string,
+      category: (arr[0]?.category || cat?.category) as any,
+      ageYears: (cat?.ageYears ?? null) as any,
+      abvPercent: (cat?.abvPercent ?? null) as any,
+      brandOrLabel: (cat?.brandOrLabel ?? undefined) as any,
     };
 
     out.push({
@@ -246,12 +292,15 @@ export async function loadBottleSummaries(): Promise<BottleSummary[]> {
       b.tastingCount - a.tastingCount ||
       a.bottle.name.localeCompare(b.bottle.name),
   );
+
   return out;
 }
 
 export async function loadBottleDetail(slug: string): Promise<{ bottle: BottleKey; tastings: BottleTasting[] }> {
+  const catalogue = await loadCatalogueBottles();
   const all = await loadAllBottleTastings();
 
+  // First try to match by tastings-derived slug
   const byKey = new Map<string, BottleTasting[]>();
   for (const t of all) {
     const arr = byKey.get(t.bottleKey) || [];
@@ -259,38 +308,40 @@ export async function loadBottleDetail(slug: string): Promise<{ bottle: BottleKe
     byKey.set(t.bottleKey, arr);
   }
 
-  let key: string | null = null;
+  for (const [key, arr] of byKey.entries()) {
+    const preferred = preferredBottleSlug(arr);
+    if (preferred === slug) {
+      const first = arr[0];
+      const cat = catalogue.find((b) => b.key === key) || null;
 
-  if (byKey.has(slug)) key = slug;
+      const bottle: BottleKey = {
+        key,
+        slug: preferred,
+        name: first?.bottleName || cat?.name || slug,
+        category: first?.category || cat?.category,
+        ageYears: cat?.ageYears ?? null,
+        abvPercent: cat?.abvPercent ?? null,
+        brandOrLabel: cat?.brandOrLabel,
+      };
 
-  if (!key) {
-    for (const [k, arr] of byKey.entries()) {
-      if (arr.some((t) => t.bottleSlug === slug)) {
-        key = k;
-        break;
-      }
+      return { bottle, tastings: arr };
     }
   }
 
-  if (!key) {
-    return { bottle: { key: slug, slug, name: slug }, tastings: [] };
+  // If no tastings, fall back to catalogue-only bottle
+  const cat = catalogue.find((b) => b.slug === slug) || null;
+  if (cat) {
+    const bottle: BottleKey = {
+      key: cat.key,
+      slug: cat.slug,
+      name: cat.name,
+      category: cat.category,
+      ageYears: cat.ageYears ?? null,
+      abvPercent: cat.abvPercent ?? null,
+      brandOrLabel: cat.brandOrLabel,
+    };
+    return { bottle, tastings: [] };
   }
 
-  const tastings = byKey.get(key) || [];
-  if (tastings.length === 0) {
-    return { bottle: { key, slug, name: slug }, tastings: [] };
-  }
-
-  const first = tastings[0];
-  const preferredSlug = preferredBottleSlug(tastings);
-
-  return {
-    bottle: {
-      key,
-      slug: preferredSlug,
-      name: first.bottleName,
-      category: first.category,
-    },
-    tastings: tastings.sort((a, b) => a.tastingSlug.localeCompare(b.tastingSlug)),
-  };
+  return { bottle: { key: slug, slug, name: slug }, tastings: [] };
 }
