@@ -73,8 +73,6 @@ export default async function BottleDetailPage({
   searchParams?: { stars?: string };
 }) {
   const { bottle, tastings } = await loadBottleDetail(params.slug);
-  if (!tastings.length) notFound();
-
   const starsFilter = searchParams?.stars ? Number(searchParams.stars) : null;
   const stars = starsFilter && Number.isFinite(starsFilter) ? Math.max(1, Math.min(5, starsFilter)) : null;
 
@@ -149,7 +147,7 @@ return (
               <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">{bottle.name}</h1>
               <div className="mt-1 text-sm text-neutral-600">
                 {bottle.category ? <span>{bottle.category} · </span> : null}
-                {tastings.length} tasting(s)
+                {tastings.length ? `${tastings.length} tasting(s)` : "0 tastings yet · Be the first to review."}
               </div>
             </div>
 

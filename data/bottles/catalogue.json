@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "bottles": [
+    { "key": "errol-wings-12yo", "slug": "errol-wings-12-year-old", "name": "Errol Wings 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "bells", "slug": "bells", "name": "Bell’s", "category": "Blended Scotch Whisky" },
+    { "key": "famous-grouse", "slug": "famous-grouse", "name": "The Famous Grouse", "category": "Blended Scotch Whisky" },
+    { "key": "johnnie-walker-red-label", "slug": "johnnie-walker-red-label", "name": "Johnnie Walker Red Label", "category": "Blended Scotch Whisky" },
+    { "key": "ballantines", "slug": "ballantines", "name": "Ballantine’s", "category": "Blended Scotch Whisky" },
+    { "key": "dewars", "slug": "dewars", "name": "Dewar’s", "category": "Blended Scotch Whisky" },
+    { "key": "dewars-12yo", "slug": "dewars-12-year-old", "name": "Dewar’s 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "chivas-regal-12yo", "slug": "chivas-regal-12-year-old", "name": "Chivas Regal 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "grants", "slug": "grants", "name": "Grant’s", "category": "Blended Scotch Whisky" },
+    { "key": "highland-mist", "slug": "highland-mist", "name": "Highland Mist", "category": "Blended Scotch Whisky" },
+    { "key": "langs", "slug": "langs", "name": "Langs", "category": "Blended Scotch Whisky" },
+    { "key": "aberfort", "slug": "aberfort", "name": "Aberfort", "category": "Blended Scotch Whisky" },
+    { "key": "orson", "slug": "orson", "name": "Orson", "category": "Blended Scotch Whisky" }
+  ]
+}
