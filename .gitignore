@@ -11,3 +11,6 @@ _audit_bottles.txt
 scripts/audit-bottles.cjs
 
 .env.local
+
+# local scratch/exports
+public/bottles/thumbs/*.bad
