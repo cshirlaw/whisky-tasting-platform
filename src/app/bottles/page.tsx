@@ -10,13 +10,21 @@ export const metadata = {
 
 const IMAGE_EXTS = ["jpg", "jpeg", "png", "webp", "avif"] as const;
 
-function pickBottleImage(slug: string): string | null {
+function pickBottleImage(bottleKey: string, slug: string): string | null {
+  const thumbsDir = path.join(process.cwd(), "public", "bottles", "thumbs");
+  for (const ext of IMAGE_EXTS) {
+    const file = `${bottleKey}.${ext}`;
+    const full = path.join(thumbsDir, file);
+    if (fs.existsSync(full)) return `/bottles/thumbs/${file}`;
+  }
+
   const baseDir = path.join(process.cwd(), "public", "bottles");
   for (const ext of IMAGE_EXTS) {
     const file = `${slug}.${ext}`;
     const full = path.join(baseDir, file);
     if (fs.existsSync(full)) return `/bottles/${file}`;
   }
+
   return null;
 }
 
@@ -59,7 +67,7 @@ export default async function BottlesIndexPage() {
                   meta={metaParts.join(" · ")}
                   rightTop={b.avgOverall1to10 !== null ? `${b.avgOverall1to10.toFixed(1)}/10` : "—"}
                   rightBottom={`${b.tastingCount} tasting(s)`}
-                  imageSrc={pickBottleImage(b.bottle.slug)}
+                  imageSrc={pickBottleImage(b.bottle.key, b.bottle.slug)}
                 />
               );
             })}
