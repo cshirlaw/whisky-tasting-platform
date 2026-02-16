@@ -16,6 +16,8 @@ function crumbLabel(seg: string) {
   if (seg === "bottles") return "Bottles";
   if (seg === "tastings") return "Tastings";
   if (seg === "reviewers") return "Contributors";
+  if (seg === "admin") return "Admin";
+  if (seg === "consumer-review") return "Consumer Review";
   return titleCaseFromSlug(seg);
 }
 
@@ -33,6 +35,7 @@ export default function SiteHeader() {
   const nav = [
     { href: "/", label: "Home" },
     { href: "/bottles", label: "Bottles" },
+    { href: "/admin/consumer-review", label: "Admin" }
   ];
 
   return (
