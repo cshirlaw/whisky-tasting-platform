@@ -102,11 +102,11 @@ export default async function BottlesIndexPage() {
 
           <section className="mt-10">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h2 className="text-lg font-semibold text-neutral-900">Other whiskies with tastings</h2>
+              <h2 className="text-lg font-semibold text-neutral-900">Single malts (expert tastings)</h2>
               <div className="text-sm text-neutral-600">{sortedOther.length} bottle(s)</div>
             </div>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-              These are not in the retail blends catalogue, but have tasting entries recorded.
+              Expert single malts and other non-catalogue whiskies with tasting entries. We will likely move these into a separate area later.
             </p>
 
             {sortedOther.length === 0 ? (
