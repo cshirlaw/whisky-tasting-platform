@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "bottles": [
+    { "key": "johnnie-walker-black-label-12yo", "slug": "johnnie-walker-black-label-12-year-old", "name": "Johnnie Walker Black Label 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "chivas-regal-12yo", "slug": "chivas-regal-12-year-old", "name": "Chivas Regal 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "ballantines-12yo", "slug": "ballantines-12-year-old", "name": "Ballantine’s 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "dewars-12yo", "slug": "dewars-12-year-old", "name": "Dewar’s 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "famous-grouse-smoky-black", "slug": "famous-grouse-smoky-black", "name": "The Famous Grouse Smoky Black", "category": "Blended Scotch Whisky" },
+    { "key": "grants", "slug": "grants", "name": "Grant’s", "category": "Blended Scotch Whisky" },
+    { "key": "grants-triple-wood-12yo", "slug": "grants-triple-wood-12-year-old", "name": "Grant’s Triple Wood 12 Year Old", "category": "Blended Scotch Whisky" },
+    { "key": "whyte-and-mackay-double-matured", "slug": "whyte-and-mackay-double-matured", "name": "Whyte & Mackay Double Matured", "category": "Blended Scotch Whisky" },
+    { "key": "aberfeldy-12yo", "slug": "aberfeldy-12-year-old", "name": "Aberfeldy 12 Year Old", "category": "Single Malt Scotch Whisky" },
+    { "key": "cutty-sark-prohibition", "slug": "cutty-sark-prohibition", "name": "Cutty Sark Prohibition Edition", "category": "Blended Scotch Whisky" },
+    { "key": "teachers-highland-cream", "slug": "teachers-highland-cream", "name": "Teacher’s Highland Cream", "category": "Blended Scotch Whisky" }
+  ]
+}

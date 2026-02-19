@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { loadExpertTastingsByContributorId } from "@/lib/expertTastings";
 import { loadReviewer } from "@/lib/reviewers";
 
@@ -11,11 +10,28 @@ function slugFromFilename(filename: string) {
   return String(filename || "").replace(/\.json$/i, "");
 }
 
-export default async function VaultPage({
-  searchParams,
-}: {
-  searchParams: { k?: string };
-}) {
+function AccessRequired() {
+  return (
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+        <h1 className="text-2xl font-semibold tracking-tight text-neutral-900">Vault</h1>
+        <p className="mt-2 text-sm leading-relaxed text-neutral-700 sm:text-base">
+          Access required. Add an access key in the URL, for example:
+        </p>
+        <p className="mt-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 font-mono text-sm text-neutral-900">
+          /vault?k=YOUR_KEY
+        </p>
+        <div className="mt-6 text-sm">
+          <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/">
+            Back to Home
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+export default async function VaultPage({ searchParams }: { searchParams: { k?: string } }) {
   const key = String(searchParams?.k || "");
   const expected = String(process.env.VAULT_KEY || "");
 
@@ -27,12 +43,17 @@ export default async function VaultPage({
           <p className="mt-2 text-sm leading-relaxed text-neutral-700 sm:text-base">
             VAULT_KEY is not set. Add VAULT_KEY to your environment (local and Vercel) to enable this page.
           </p>
+          <div className="mt-6 text-sm">
+            <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/">
+              Back to Home
+            </Link>
+          </div>
         </section>
       </main>
     );
   }
 
-  if (!key || key !== expected) notFound();
+  if (!key || key !== expected) return <AccessRequired />;
 
   const ids = ["private-contributor", "david-reid"];
 
@@ -64,7 +85,7 @@ export default async function VaultPage({
             <div className="mt-2 text-sm">
               <Link
                 className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900"
-                href={`/reviewers/${id}`}
+                href={`/vault/${id}?k=${encodeURIComponent(key)}`}
               >
                 Open contributor page
               </Link>
