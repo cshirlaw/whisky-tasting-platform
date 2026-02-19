@@ -57,6 +57,7 @@ export default async function BottlesIndexPage() {
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <div className="min-w-0">
               <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
+                <div className="mt-1 text-xs text-neutral-500">Catalogue: Global Core</div>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
                 Standard blended Scotch whiskies commonly found in retail, shown with expert tastings.
               </p>
