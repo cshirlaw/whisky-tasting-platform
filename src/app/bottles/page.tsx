@@ -1,4 +1,5 @@
 import BottleCard from "@/components/BottleCard";
+import CatalogueToggle from "@/components/CatalogueToggle";
 import { loadBottleSummaries } from "@/lib/bottles";
 import fs from "node:fs";
 import path from "node:path";
@@ -58,6 +59,7 @@ export default async function BottlesIndexPage() {
             <div className="min-w-0">
               <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
                 <div className="mt-1 text-xs text-neutral-500">Catalogue: Global Core</div>
+              <CatalogueToggle current="global-core" />
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
                 Standard blended Scotch whiskies commonly found in retail, shown with expert tastings.
               </p>
