@@ -64,7 +64,7 @@ export default async function CatalogueLentaSpbPage() {
         <div className="mx-auto max-w-3xl">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="min-w-0">
-              <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles – Lenta SPB</h1>
+              <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
               <div className="mt-1 text-xs text-neutral-500">Catalogue: Lenta SPB</div>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
                 A specific retail set based on the Lenta supermarket shelf photos (St Petersburg).
