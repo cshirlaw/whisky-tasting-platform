@@ -57,14 +57,16 @@ export default async function BottlesIndexPage() {
         <div className="mx-auto max-w-3xl">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <div className="min-w-0">
-              <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
+                <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
                 <div className="mt-1 text-xs text-neutral-500">Catalogue: Global Core</div>
-              <CatalogueToggle current="global-core" />
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-                Standard blended Scotch whiskies commonly found in retail, shown with expert tastings.
-              </p>
-            </div>
-            <div className="shrink-0 text-sm text-neutral-600">{items.length} bottle(s)</div>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+                  Standard blended Scotch whiskies commonly found in retail, shown with expert tastings.
+                </p>
+                <div className="mt-4">
+                  <CatalogueToggle current="global-core" />
+                </div>
+              </div>
+              <div className="shrink-0 text-sm text-neutral-600">{items.length} bottle(s)</div>
           </div>
         </div>
       </section>

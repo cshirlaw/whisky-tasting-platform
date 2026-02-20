@@ -77,11 +77,6 @@ export default async function CatalogueLentaSpbPage() {
             <CatalogueToggle current="lenta-spb" />
           </div>
 
-          <div className="mt-4 text-sm">
-            <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href="/bottles">
-              Back to Global Core
-            </Link>
-          </div>
         </div>
       </section>
 
