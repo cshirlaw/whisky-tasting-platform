@@ -82,7 +82,7 @@ export default async function PremiumCoreCataloguePage() {
               <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">Bottles</h1>
               <div className="mt-1 text-xs text-neutral-500">Catalogue: Premium Core</div>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-                A curated premium-core pool intended for pilot sessions (typically 6–7 bottles selected from this list).
+                A curated premium-core pool intended for pilot sessions.
               </p>
             </div>
             <div className="shrink-0 text-sm text-neutral-600">{catalogue.length} bottle(s)</div>

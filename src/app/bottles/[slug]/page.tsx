@@ -122,16 +122,16 @@ export default async function BottleDetailPage({
 return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-        <div className="grid gap-6 md:grid-cols-[240px_1fr] md:items-start">
+        <div className="grid gap-6 md:grid-cols-[180px_1fr] md:items-start">
           <div className="w-full">
             {imgSrc ? (
-              <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 shadow-[0_1px_0_rgba(0,0,0,0.02)]">
+              <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 p-2 shadow-[0_1px_0_rgba(0,0,0,0.02)]">
                 <Image
                   src={imgSrc}
                   alt={bottle.name}
                   width={800}
                   height={1000}
-                  className="h-auto w-full object-contain"
+                  className="mx-auto h-auto w-full max-h-[440px] object-contain"
                   priority
                 />
               </div>
