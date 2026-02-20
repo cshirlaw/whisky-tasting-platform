@@ -77,7 +77,6 @@ export default async function BottlesIndexPage() {
         <>
           <section className="mt-6">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h2 className="text-lg font-semibold text-neutral-900">Retail blends</h2>
               <div className="text-sm text-neutral-600">{sortedBlends.length} bottle(s)</div>
             </div>
 
