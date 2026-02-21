@@ -130,15 +130,13 @@ export default async function PremiumCoreCataloguePage() {
 
           <div className="mt-3 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {withoutTastings.map(({ c }) => (
-              <div key={c.key} className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-                <div className="text-base font-semibold text-neutral-900">{c.name}</div>
-                <div className="mt-1 text-sm text-neutral-600">{c.category || "—"}</div>
-                <div className="mt-3 text-sm">
-                  <Link className="underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-900" href={`/bottles/${c.slug}`}>
-                    Open bottle page
-                  </Link>
-                </div>
-              </div>
+              <BottleCard
+                key={c.key}
+                title={c.name}
+                href={`/bottles/${c.slug}`}
+                meta={c.category || "—"}
+                imageSrc={pickBottleImage(c.key, c.slug)}
+              />
             ))}
           </div>
         </section>
