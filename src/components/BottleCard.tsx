@@ -22,7 +22,7 @@ export default function BottleCard({
         {imageSrc ? (
           <div className="shrink-0">
             <div className="overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-[0_1px_0_rgba(0,0,0,0.02)] transition group-hover:border-neutral-300">
-              <div className="flex h-[90px] w-[72px] items-center justify-center">
+              <div className="flex h-[120px] w-[80px] items-center justify-center">
                 <Image
                   src={imageSrc}
                   alt={title}
